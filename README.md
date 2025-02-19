@@ -38,3 +38,15 @@ php artisan serve
 # Можно запускать и composer run dev, но тут следует учесть, эта команда запускает задачи, определенные в секции scripts файла composer.json
 # По умолчанию сервер будет доступен по адресу http://localhost:8000
 ```
+##### 1.3 Рекомендации для разработки
+Во время разработки рекомендуется регулярно очищать кеш:
+```bash
+php artisan cache:clear
+php artisan config:clear
+php artisan route:clear
+php artisan view:clear
+```
+Так же можно отключить на время разработки кеш в браузере (Chrome, FireFox):
+- Жмем `F12` или `Ctrl + Shift + I` (Windows/Linux);
+- В открывшихся инструментах разработчика идем вкладку "Network"(Сеть); 
+- На панели инструментов вкладки "Network"  найдите флажок (checkbox) с надписью "Disable cache (while DevTools is open)"  (Отключить кэш (при открытом DevTools)).
