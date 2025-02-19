@@ -13,8 +13,28 @@ DB_DATABASE=lara_app
 DB_USERNAME=root
 DB_PASSWORD=password
 ```
-__Запуск сервера(останов):__
-```
-composer run dev
-Ctrl + C
+##### 1.2 Разворачивание проекта после скачивания с GitHub
+``` conf
+# Скачайте проект с GitHub
+git clone https://github.com/ikv1980/Laravel-App.git
+# Установите зависимости
+composer install
+# Создайте файл .env (или скопируйте нужный)
+cp .env.example .env
+# Выполните команду для генерации ключа приложения
+# Этот ключ автоматически добавляется в файл .env проекта в переменную APP_KEY.
+php artisan key:generate
+# Если проект использует базу данных, выполните миграции (fresh - перезапись БД)
+php artisan migrate
+php artisan migrate:fresh
+php artisan migrate:rollback    # откат последних изменений
+php artisan migrate:reset       # откат всех миграций
+# Для разработки вы можете использовать встроенный сервер
+php artisan serve
+--host=127.0.0.1    # адрес хоста, на котором будет запущен сервер (localhost)
+--port=8080         # порт, который будет использоваться сервером (8000)
+--no-reload         # отключает автоматическую перезагрузку сервера при изменении файлов
+--quiet             # подавляет вывод сообщений об ошибках и логов в консоль
+# Можно запускать и composer run dev, но тут следует учесть, эта команда запускает задачи, определенные в секции scripts файла composer.json
+# По умолчанию сервер будет доступен по адресу http://localhost:8000
 ```
