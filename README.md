@@ -1,5 +1,5 @@
 # Laravel-App
-##### 1.1 Установка через Composer; 
+##### 1.1 Установка через Composer
 - Прежде чем создавать приложение Laravel, необходимо установить [PHP](https://php.net/), [Composer](https://getcomposer.org/) и установщик [Laravel](https://github.com/laravel/installer). Кроме того, следует установить [Node и NPM](https://nodejs.org/), чтобы можно было компилировать ресурсы внешнего интерфейса приложения.
 После всех приготовленний разворачиваем проект командой
 `laravel new lara-app` - тут выбираем вариант развертывания.
