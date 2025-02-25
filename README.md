@@ -5,7 +5,7 @@
 `laravel new lara-app` - тут выбираем вариант развертывания.
 
 После установки в .ENV установить параметры подключения к БД. Например:
-``` env
+``` apacheconf
 DB_CONNECTION=mysql
 DB_HOST=555.555.55.55
 DB_PORT=3306
@@ -14,7 +14,7 @@ DB_USERNAME=root
 DB_PASSWORD=password
 ```
 ##### 1.2 Разворачивание проекта после скачивания с GitHub
-``` conf
+``` apacheconf
 # Скачайте проект с GitHub
 git clone https://github.com/ikv1980/Laravel-App.git
 # Установите зависимости
@@ -40,7 +40,7 @@ php artisan serve
 ```
 ##### 1.3 Рекомендации для разработки
 Во время разработки рекомендуется регулярно очищать кеш:
-```bash
+```apacheconf
 php artisan cache:clear
 php artisan config:clear
 php artisan route:clear
@@ -50,3 +50,14 @@ php artisan view:clear
 - Жмем `F12` или `Ctrl + Shift + I` (Windows/Linux);
 - В открывшихся инструментах разработчика идем вкладку "Network"(Сеть); 
 - На панели инструментов вкладки "Network"  найдите флажок (checkbox) с надписью "Disable cache (while DevTools is open)"  (Отключить кэш (при открытом DevTools)).
+
+##### 1.4 Дополнительные данные
+- Официальная документация [Laravel](https://laravel.com/docs)
+- Русскоязычный информационный портал [Laravel.su](https://laravel.su/)
+
+Чтобы ускорить работу вашего приложения, вы должны кешировать все конфигурационные файлы в один файл  
+```apacheconf
+php artisan config:cache    # кеширование
+php artisan config:clear    # очистка кеша
+```
+Если вы запускаете команду `config:cache` во время процесса развертывания, убедитесь, что вы вызываете функцию `env` только из ваших файлов конфигурации. После кэширования конфигурации, файл `.env` не будет загружен, и функция `env` будет возвращать только внешние переменные окружения на системном уровне.
