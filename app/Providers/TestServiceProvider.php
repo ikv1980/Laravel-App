@@ -18,7 +18,7 @@ class TestServiceProvider extends ServiceProvider
         // bind - каждый раз создается новый объект
         // singleton - объект создается только один раз
 
-        // Регистрируем фасад
+        // Регистрация фасада
         $this->app->booted(function () {
             class_alias(\App\Facades\TestFacade::class, 'Test');
         });

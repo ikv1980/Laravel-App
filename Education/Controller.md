@@ -10,17 +10,45 @@
   }
 </style>
 
-## Тема 6. Написание сервис-провайдеров и фасада для него:
+## Тема 7. Роутинг и [Маршрутизация](https://laravel.su/docs/11.x/routing)
 
 ---
-### 1. Создание сервис-провайдера через artisan. 
+Маршруты все прописываются в файле `\routes\web.php`
+```php
+// Главная страница сайта
+Route::view('/', 'welcome')->name('home');
+
+// Редирект (перенаправление)
+Route::redirect('/back', '/')->name('redirect');
+
+// Используется, если никакой маршрут не подошел. Размещать в самом низу
+Route::fallback(function () {
+    return 'Страницы не существует';
+});
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+### 1. Создание [контроллера](https://laravel.su/docs/11.x/controllers) через artisan. 
 <details>
 <summary>Подробнее</summary>
 
 Сервис-провайдер создается через командную строку командой
 
 ```apacheconf 
-php artisan make:provider TestServiceProvider
+php artisan make:controller UserController
 ```
 
 При создании провайдер сразу регистрируется в файле `..\bootstrap\providers.php`
