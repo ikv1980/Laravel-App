@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\BlogController;
+use App\Http\Controllers\PostController;
 use App\Http\Controllers\TestController;
 use Illuminate\Support\Facades\Route;
 
@@ -17,8 +17,9 @@ Route::redirect('/back', '/')->name('redirect');
 
 Route::get('/test', TestController::class);
 
-// Определение маршрутов для BlogController (содержит все стандартные)
-Route::resource('photos', BlogController::class);
+
+// Определение маршрутов для PostController (содержит все стандартные)
+Route::resource('photos', PostController::class);
 
 
 

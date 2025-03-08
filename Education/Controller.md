@@ -26,7 +26,7 @@ Route::fallback(function () {
     return 'Страницы не существует';
 });
 ```
-
+Для просмотра списка [маршрутов](https://laravel.su/docs/11.x/routing#spisok-vasix-marsrutov) команда `php artisan route:list`
 
 
 
