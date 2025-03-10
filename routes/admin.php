@@ -1,14 +1,14 @@
 <?php
 
-use App\Http\Controllers\CommentController;
-use App\Http\Controllers\PostController;
+use App\Http\Controllers\Posts\CommentController;
+use App\Http\Controllers\Admin\PostController;
 use Illuminate\Support\Facades\Route;
 
 
-// CRUD (Create, Read, Update, Delete
 // Контроллер для ПОСТОВ пользователя
-Route::middleware(['my_log'])->prefix('admin')->group(function () {
-    Route::get('/posts', [PostController::class,'index'])->name('admin.posts.index')->middleware('my_log');;
+Route::prefix('admin')->group(function () {
+    // CRUD (Create, Read, Update, Delete
+    Route::get('/posts', [PostController::class,'index'])->name('admin.posts.index');
     Route::get('/posts/create', [PostController::class,'create'])->name('admin.posts.create');
     Route::post('/posts', [PostController::class,'store'])->name('admin.posts.store');
     Route::get('/posts/{post}', [PostController::class,'show'])->name('admin.posts.show');
