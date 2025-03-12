@@ -12,8 +12,16 @@
 
 ## Тема 7. Маршрутизация, контроллеры и посредники
 
+`php artisan down` - перевод в режим обслуживания  
+`php artisan up` - возобновление работы
+Настройка фильтра страниц для режима обслуживания в файле `\bootstrap\app.php`
+```php
+// список доступных URL
+$middleware->preventRequestsDuringMaintenance(except: ['admin*', 'test']);
+```
+
 ---
-### 1. Контроллеры
+### 1. Контроллеры (Controllers)
 <details>
 <summary>Подробнее</summary>
 
@@ -37,7 +45,7 @@ php artisan make:controller TestController --invokable
 </details>
 
 ---
-### 2. Маршрутизация
+### 2. Маршрутизация (Route)
 <details>
 <summary>Подробнее</summary>
 
@@ -82,6 +90,66 @@ web:
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+### 3. Посредники (Middleware)
+<details>
+<summary>Подробнее</summary>
+
+Официальная документация [тут](https://laravel.com/docs/11.x/middleware), русскоязычная [тут](https://laravel.su/docs/11.x/middleware).  
+Посредник создается через командную строку командой и хранятся в каталоге `\app\Http\Middleware`
+```php
+php artisan make:middleware LogMiddleware
+```
+**Посредники (middleware) регистрируются**:  
+- сразу указываем на маршруте  
+```php
+// в файле `routes\web.php`
+Route::get('/test', [TestController::class, 'index'])->name('test')->middleware(\App\Http\Middleware\LogMiddleware::class);
+```
+- глобально для всего сайта   
+```php
+// в файле `bootstrap/app.php`
+->withMiddleware(function (Middleware $middleware) {
+    $middleware->append(\App\Http\Middleware\LogMiddleware::class);
+})
+```
+- регистрируем alias и затем устанавливаем на маршрут
+```php
+// в файле `bootstrap/app.php`
+$middleware->alias([
+    'my_log' => LogMiddleware::class,
+]);
+// в файле `routes\web.php`
+Route::middleware(['my_log'])->group(function () {
+    Route::get('blog', [BlogController::class, 'index'])->name('blog.index');
+    Route::get('blog/{blog}', [BlogController::class, 'show'])->name('blog.show');
+    Route::put('blog/{blog}/like', [BlogController::class, 'like'])->name('blog.like');
+});
+```
+В файле `.ENV` указываем какие логи необходимо писать
+- **debug**: Все сообщения (по умолчанию)  
+- **info**: Только информационные сообщения и выше  
+- **notice**: Только заметки и выше  
+- **warning**: Только предупреждения и выше  
+- **error**: Только ошибки и выше  
+- **critical**: Только критические ошибки и выше  
+- **alert**: Только экстренные сообщения  
+- **emergency**: Только чрезвычайные ситуации  
+
+*Очистка логов через консоль*
+- `echo "" > storage/logs/laravel.log`
+- 
+</details>
 
 
 

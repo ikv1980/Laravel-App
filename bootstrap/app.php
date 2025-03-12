@@ -1,5 +1,6 @@
 <?php
 
+//use App\Http\Middleware\PreventRequestsDuringMaintenance;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
@@ -16,7 +17,12 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware) {
-        //
+        // настройки режима обслуживания
+        $middleware->preventRequestsDuringMaintenance(except: ['admin*', 'test']);
+        // $middleware->append(\App\Http\Middleware\LogMiddleware::class);
+        $middleware->alias([
+            'my_log' => \App\Http\Middleware\LogMiddleware::class,
+        ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //
