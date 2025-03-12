@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\Posts\CommentController;
 use App\Http\Controllers\Admin\PostController;
 use Illuminate\Support\Facades\Route;
 
@@ -15,6 +14,12 @@ Route::prefix('admin')->group(function () {
     Route::get('/posts/{post}/edit', [PostController::class,'edit'])->name('admin.posts.edit');
     Route::patch('/posts/{post}', [PostController::class,'update'])->name('admin.posts.update');
     Route::delete('/posts/{post}', [PostController::class,'destroy'])->name('admin.posts.destroy');
-    // Комментарии для постов
-    Route::get('/posts/{post}/comments/{comment}/edit', [CommentController::class,'edit'])->name('admin.posts.comments.edit');
+    Route::put('/posts/{post}/like', [PostController::class,'like'])->name('admin.posts.like');
 });
+
+// Можно прописать более кратко.
+// Но такая запись менее информативна
+//Route::prefix('admin')->as('admin.')->group(function () {
+//    // CRUD (Create, Read, Update, Delete
+//    Route::resource('posts', PostController::class);
+//});

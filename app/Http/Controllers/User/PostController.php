@@ -41,4 +41,9 @@ class    PostController extends Controller
     {
         return "User. Страница удаления поста {$id_post}";
     }
+
+    public function like(): string
+    {
+        return 'User. Лайк поста + 1';
+    }
 }

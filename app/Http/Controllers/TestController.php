@@ -3,11 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
 
 class TestController extends Controller
 {
     public function index(){
-        return "Главная страница  TEST";
+        $answer = Route::is('test') ? 'YES' : 'NO';
+        return "Главная страница - TEST: $answer";
     }
 
     // Метод, который вызывается по умолчанию, если метод не существует

@@ -41,4 +41,9 @@ class    PostController extends Controller
     {
         return "Admin. Страница удаления поста {$id_post}";
     }
+
+    public function like(): string
+    {
+        return 'Admin. Лайк поста + 1';
+    }
 }
