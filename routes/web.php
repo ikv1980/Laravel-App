@@ -15,10 +15,10 @@ Route::redirect('/back', '/')->name('redirect');
 
 // Регистрация и авторизация пользователей
 Route::middleware('guest')->group(function () {
-    Route::get('register', [RegisterController::class, 'index'])->name('register.index');    // страница регистрации
-    Route::post('register', [RegisterController::class, 'store'])->name('register.store');   // страница обработки
-    Route::get('login', [LoginController::class, 'index'])->name('login.index');    // страница входа
-    Route::post('login', [LoginController::class, 'store'])->name('login.store');    // страница обработки
+    Route::get('register', [RegisterController::class, 'index'])->name('register.index');
+    Route::post('register', [RegisterController::class, 'store'])->name('register.store');
+    Route::get('login', [LoginController::class, 'index'])->name('login.index');
+    Route::post('login', [LoginController::class, 'store'])->name('login.store');
 });
 
 // Тестовый контроллер для Блога - удалить потом

@@ -1,6 +1,5 @@
 <?php
 
-//use App\Http\Middleware\PreventRequestsDuringMaintenance;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
@@ -17,11 +16,18 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware) {
-        // настройки режима обслуживания
+        // настройки режима обслуживания `php artisan down`
         $middleware->preventRequestsDuringMaintenance(except: ['admin*', 'test']);
+        // добавление посредника в глобальное пространство
         // $middleware->append(\App\Http\Middleware\LogMiddleware::class);
+        // удаление посредника из глобального пространства
+        // $middleware->remove(Illuminate\Foundation\Http\Middleware\TrimStrings::class);
+        // Ограничение 60 запросов в минуту для API
+        // Регистрация алиасов
         $middleware->alias([
             'my_log' => \App\Http\Middleware\LogMiddleware::class,
+            'active_user' =>\App\Http\Middleware\ActiveUserMiddleware::class,
+            'active_admin' =>\App\Http\Middleware\ActiveAdminMiddleware::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {

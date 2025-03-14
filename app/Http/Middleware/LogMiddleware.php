@@ -8,14 +8,11 @@ use Symfony\Component\HttpFoundation\Response;
 
 class LogMiddleware
 {
-    /**
-     * Handle an incoming request.
-     *
-     * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
-     */
+    // Логирование
+
     public function handle(Request $request, Closure $next): Response
     {
-        //info('Запрос', ['key' => 'value']);
+        // info('Запрос', ['key' => 'value']);
         // Вывод URL  и параметров запроса
         info($request->url(), $request->all());
         return $next($request);

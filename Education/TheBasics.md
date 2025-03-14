@@ -110,20 +110,27 @@ web:
 ```php
 php artisan make:middleware LogMiddleware
 ```
-**Посредники (middleware) регистрируются**:  
-- сразу указываем на маршруте  
+**Посредники (middleware)**:  
+- непосредственная регистрация на маршруте  
 ```php
 // в файле `routes\web.php`
 Route::get('/test', [TestController::class, 'index'])->name('test')->middleware(\App\Http\Middleware\LogMiddleware::class);
 ```
-- глобально для всего сайта   
+- глобальная регистрация посредника   
 ```php
 // в файле `bootstrap/app.php`
 ->withMiddleware(function (Middleware $middleware) {
     $middleware->append(\App\Http\Middleware\LogMiddleware::class);
 })
 ```
-- регистрируем alias и затем устанавливаем на маршрут
+- удаление глобального посредника
+```php
+// в файле `bootstrap/app.php`
+->withMiddleware(function (Middleware $middleware) {
+    $middleware->remove(Illuminate\Foundation\Http\Middleware\TrimStrings::class);
+})
+```
+- регистрация alias и затем устанавливаем на маршрут
 ```php
 // в файле `bootstrap/app.php`
 $middleware->alias([
@@ -136,6 +143,16 @@ Route::middleware(['my_log'])->group(function () {
     Route::put('blog/{blog}/like', [BlogController::class, 'like'])->name('blog.like');
 });
 ```
+- настройки глобального посредника
+```php
+->withMiddleware(function (Middleware $middleware) {
+    // настройки режима обслуживания
+    $middleware->preventRequestsDuringMaintenance(except: ['admin*', 'test']);
+})
+```
+
+
+
 В файле `.ENV` указываем какие логи необходимо писать
 - **debug**: Все сообщения (по умолчанию)  
 - **info**: Только информационные сообщения и выше  
