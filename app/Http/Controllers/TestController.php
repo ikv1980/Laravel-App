@@ -10,7 +10,7 @@ class TestController extends Controller
     {
         $token = csrf_token();
         $answer = Route::is('test') ? 'YES' : 'NO';
-        return "Главная страница - TEST: $answer \n CSRF: $token";
+        return "Главная страница - TEST: $answer <br> <b>CSRF</b>: $token";
     }
 
     // Метод, который вызывается по умолчанию, если метод не существует

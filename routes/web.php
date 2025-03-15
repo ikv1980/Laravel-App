@@ -8,7 +8,7 @@ use App\Http\Controllers\TestController;
 use Illuminate\Support\Facades\Route;
 
 // Главная страница
-Route::view('/', 'welcome')->name('home');
+Route::view('/', 'home.index')->name('home');
 
 // Редирект (перенаправление)
 Route::redirect('/back', '/')->name('redirect');

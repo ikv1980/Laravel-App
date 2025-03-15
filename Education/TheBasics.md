@@ -23,7 +23,7 @@ $middleware->preventRequestsDuringMaintenance(except: ['admin*', 'test']);
 ---
 ### 1. Контроллеры (Controllers)
 <details>
-<summary>Подробнее</summary>
+<summary>Подробнее (`app\Http\Controllers`)</summary>
 
 Официальная документация [тут](https://laravel.com/docs/11.x/controllers), русскоязычная [тут](https://laravel.su/docs/11.x/controllers).  
 Контроллер создается через командную строку командой и хранятся в каталоге `\app\Http\Controllers`
@@ -47,7 +47,7 @@ php artisan make:controller TestController --invokable
 ---
 ### 2. Маршрутизация (Route)
 <details>
-<summary>Подробнее</summary>
+<summary>Подробнее(`routes`)</summary>
 
 Официальная документация [тут](https://laravel.com/docs/11.x/routing), русскоязычная [тут](https://laravel.su/docs/11.x/routing).  
 Маршруты можно разделить на три части: *публичные, для пользователя, для админа*.  
@@ -88,22 +88,10 @@ web:
 
 </details>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+---
 ### 3. Посредники (Middleware)
 <details>
-<summary>Подробнее</summary>
+<summary>Подробнее (`app\Http\Middleware`)</summary>
 
 Официальная документация [тут](https://laravel.com/docs/11.x/middleware), русскоязычная [тут](https://laravel.su/docs/11.x/middleware).  
 Посредник создается через командную строку командой и хранятся в каталоге `\app\Http\Middleware`
@@ -168,5 +156,13 @@ Route::middleware(['my_log'])->group(function () {
 - 
 </details>
 
+---
+### 4. Отображение (Views)
+<details>
+<summary>Подробнее (`resources\views`)</summary>
 
+Полезный ресурс для разработки [https://cdnjs.com/](https://cdnjs.com/)  
+**CDN** — это распределённая сеть серверов, которая позволяет доставлять контент пользователям быстрее за счёт использования серверов, расположенных ближе к конечному пользователю.
+Вместо загрузки библиотек на сервер, можно просто подключить их через URL.
 
+</details>
