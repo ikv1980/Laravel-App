@@ -4,6 +4,6 @@
 
 @section('content')
 
-    <h1>Просмотр поста</h1>
+    <h1>Просмотр поста {{$id_blog}}</h1>
 
 @endsection

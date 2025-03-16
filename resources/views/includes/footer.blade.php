@@ -1,5 +1,5 @@
 <footer class="py-3 border-bottom">
 
-    <h3>Подвал</h3>
+    <h4>© {{config('app.name')}} {{$global_date}}</h4>
 
 </footer>

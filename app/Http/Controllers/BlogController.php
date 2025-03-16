@@ -2,13 +2,23 @@
 
 namespace App\Http\Controllers;
 
+use Faker\Provider\Lorem;
 use Illuminate\Http\Request;
 
 class BlogController extends Controller
 {
     public function index()
     {
-        $posts = [1,2,3,4,5,6,7,8,9,10 ];
+        $post = (object)[
+            'id' => 1,
+            'title' => 'Post 1',
+            'content' => 'Контент поста для того, чтобы почитать'
+        ];
+
+        $posts = array_fill(0, 10, $post);
+        //dd($posts);
+
+
         $title = 'Blog';
 
         return view('blog.index', compact('posts', 'title'));
@@ -38,7 +48,7 @@ class BlogController extends Controller
 
     public function show(string $id_blog)
     {
-        return view('blog.show', [$id_blog]);
+        return view('blog.show', compact('id_blog'));
     }
 
     public function edit(string $id)
