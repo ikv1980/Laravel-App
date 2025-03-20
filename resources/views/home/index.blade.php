@@ -2,7 +2,7 @@
 
 @section('page.title', 'Проект')
 
-@section('content')
+@section('base.content')
 
     <h1>Главная страница</h1>
 

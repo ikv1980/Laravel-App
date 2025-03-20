@@ -7,7 +7,7 @@
         <title>@yield('page.title', config('app.name'))</title>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.3/css/bootstrap.min.css">
         <style>
-            .required:after{content: '*'; color: red; margin-left: 3px}
+            .required:after{content: '*'; color: red}
         </style>
     </head>
 
@@ -19,7 +19,7 @@
             <main class="flex-grow-1 py-3">
 
                 {{--Подключение секции с контентом--}}
-                @yield('content')
+                @yield('base.content')
 
             </main>
 

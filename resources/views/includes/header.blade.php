@@ -14,20 +14,27 @@
             {{--Левое меню--}}
             <ul class="navbar-nav me-auto mb-2 mb-md-0">
                 <li class="nav-item">
-                    <a href="{{route('home')}}" class="nav-link active" aria-current="page">{{__('Главная')}}</a>
+                    <a href="{{route('home')}}" class="nav-link {{active_link('home')}}" aria-current="page">
+                        {{__('Главная')}}
+                    </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{route('blog.index')}}" class="nav-link" aria-current="page">{{__('Блог')}}</a>
+                    <a href="{{route('blog.index')}}" class="nav-link {{active_link('blog.index')}}" aria-current="page">
+                        {{__('Блог')}}
+                    </a>
                 </li>
             </ul>
             {{--Правое меню--}}
             <ul class="navbar-nav ms-auto mb-2 mb-md-0">
                 <li class="nav-item">
-                    <a href="{{route('register.index')}}" class="nav-link"
-                       aria-current="page">{{__('Регистрация')}}</a>
+                    <a href="{{route('register.index')}}" class="nav-link {{active_link('register.index')}}"
+                       aria-current="page">{{__('Регистрация')}}
+                    </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{route('login.index')}}" class="nav-link" aria-current="page">{{__('Вход')}}</a>
+                    <a href="{{route('login.index')}}" class="nav-link {{active_link('login.index')}}" aria-current="page">
+                        {{__('Вход')}}
+                    </a>
                 </li>
             </ul>
         </div>

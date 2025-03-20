@@ -2,7 +2,7 @@
 
 @section('page.title', 'Проект')
 
-@section('content')
+@section('base.content')
 
     <h1>Просмотр поста {{$id_blog}}</h1>
 
