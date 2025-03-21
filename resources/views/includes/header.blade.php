@@ -1,9 +1,8 @@
-<nav class="navbar navbar-expand-md bg-body-tertiary">
+<nav class="navbar navbar-expand-md bg-body-secondary">
     <div class="container-lg">
-        <a href="{{route('home')}}" class="navbar-brand">
-            {{config('app.name')}}
+        <a class="navbar-brand" href="#">
+            <img src="https://ikv1980.ru/media/logo.svg" width="30" height="30" alt="">
         </a>
-
         {{--Мобильное меню--}}
         <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar-collapse"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -19,7 +18,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{route('blog.index')}}" class="nav-link {{active_link('blog.index')}}" aria-current="page">
+                    <a href="{{route('blog.index')}}" class="nav-link {{active_link('blog*')}}" aria-current="page">
                         {{__('Блог')}}
                     </a>
                 </li>

@@ -1,9 +1,11 @@
-@extends('layouts.base')
+@extends('layouts.main')
 
 @section('page.title', 'Проект')
 
-@section('base.content')
+@section('main.content')
 
-    <h1>Главная страница</h1>
+    <x-page-title>
+        {{__('Главная страница')}}
+    </x-page-title>
 
 @endsection

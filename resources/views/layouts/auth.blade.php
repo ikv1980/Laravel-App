@@ -1,15 +1,11 @@
-@extends('layouts.base')
+@extends('layouts.main')
 
-@section('base.content')
+@section('main.content')
 
-    <section>
-        <x-container>
-            <div class="row">
-                <div class="col-12 col-md-6 offset-md-3">
-                    @yield('auth.content')
-                </div>
-            </div>
-        </x-container>
-    </section>
+    <div class="row">
+        <div class="col-12 col-md-6 offset-md-3">
+            @yield('auth.content')
+        </div>
+    </div>
 
 @endsection

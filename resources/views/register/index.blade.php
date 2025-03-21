@@ -4,6 +4,10 @@
 
 @section('auth.content')
 
+    <x-page-title>
+        {{__('Страница регистрации')}}
+    </x-page-title>
+
     <x-card-frame>
         <x-card-header>
             <x-card-title>

@@ -1,9 +1,25 @@
-@extends('layouts.base')
+@extends('layouts.main')
 
-@section('page.title', 'Проект')
+@section('page.title', $post->title)
 
-@section('base.content')
+@section('main.content')
 
-    <h1>Просмотр поста {{$id_blog}}</h1>
+    <x-page-title>
+        {{$post->title}}
+
+        <x-slot name="link">
+            <a href="{{route('blog.index')}}" class="href">
+                {{__('Назад')}}
+            </a>
+        </x-slot>
+
+    </x-page-title>
+
+    <p class="small text-muted">
+        ({{ now()->format('d.m.Y H:i:s')}})
+    </p>
+    <p>
+        {!! $post->content !!}
+    </p>
 
 @endsection

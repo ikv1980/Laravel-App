@@ -1,36 +1,23 @@
-@extends('layouts.base')
+@extends('layouts.main')
 
-@section('page.title', )
+@section('page.title', 'Страница постов' )
 
-@section('base.content')
+@section('main.content')
 
-    <section>
-        <x-container>
-            <x-page-title>
-                {{__('Список постов')}}
-            </x-page-title>
+    <x-page-title>
+        {{__('Список постов')}}
+    </x-page-title>
 
-            @if(empty($posts))
-                {{__('В блоге нет постов')}}
-            @else
-                <div class="row">
-                    @foreach($posts as $post)
-                        <x-card-frame>
-                            <div>
-                                <a href="{{route('blog.show', $post->id)}}">Пост №{{$post->id}}</a>
-                                <h5>{{$post->title}}</h5>
-                                <p>{{$post->content}}</p>
-                            </div>
-                        </x-card-frame>
-                    @endforeach
+    @if(empty($posts))
+        {{__('В блоге нет постов')}}
+    @else
+        <div class="row row-gap-3">
+            @foreach($posts as $post)
+                <div class="col-12 col-md-3">
+                    <x-blog.card :post="$post"/>
                 </div>
-            @endif
-        </x-container>
-    </section>
-
-
-
-
-
+            @endforeach
+        </div>
+    @endif
 
 @endsection
