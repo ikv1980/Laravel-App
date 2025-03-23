@@ -19,7 +19,7 @@ class BlogController extends Controller
         //dd($posts);
 
 
-        $title = 'Blog';
+        $title = 'Блог. Посты';
 
         return view('blog.index', compact('posts', 'title'));
 

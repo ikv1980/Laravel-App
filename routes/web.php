@@ -15,15 +15,15 @@ Route::redirect('/back', '/')->name('redirect');
 
 // Регистрация и авторизация пользователей
 Route::middleware('guest')->group(function () {
-    Route::get('register', [RegisterController::class, 'index'])->name('register.index');
+    Route::get('register', [RegisterController::class, 'index'])->name('register');
     Route::post('register', [RegisterController::class, 'store'])->name('register.store');
-    Route::get('login', [LoginController::class, 'index'])->name('login.index');
+    Route::get('login', [LoginController::class, 'index'])->name('login');
     Route::post('login', [LoginController::class, 'store'])->name('login.store');
 });
 
 // Тестовый контроллер для Блога - удалить потом
 Route::middleware(['my_log'])->group(function () {
-    Route::get('blog', [BlogController::class, 'index'])->name('blog.index');
+    Route::get('blog', [BlogController::class, 'index'])->name('blog');
     Route::get('blog/{blog}', [BlogController::class, 'show'])->name('blog.show');
     Route::put('blog/{blog}/like', [BlogController::class, 'like'])->name('blog.like');
 });

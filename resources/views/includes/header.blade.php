@@ -18,7 +18,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{route('blog.index')}}" class="nav-link {{active_link('blog*')}}" aria-current="page">
+                    <a href="{{route('blog')}}" class="nav-link {{active_link('blog*')}}" aria-current="page">
                         {{__('Блог')}}
                     </a>
                 </li>
@@ -26,12 +26,12 @@
             {{--Правое меню--}}
             <ul class="navbar-nav ms-auto mb-2 mb-md-0">
                 <li class="nav-item">
-                    <a href="{{route('register.index')}}" class="nav-link {{active_link('register.index')}}"
+                    <a href="{{route('register')}}" class="nav-link {{active_link('register')}}"
                        aria-current="page">{{__('Регистрация')}}
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{route('login.index')}}" class="nav-link {{active_link('login.index')}}" aria-current="page">
+                    <a href="{{route('login')}}" class="nav-link {{active_link('login')}}" aria-current="page">
                         {{__('Вход')}}
                     </a>
                 </li>

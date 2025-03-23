@@ -9,12 +9,22 @@ class    PostController extends Controller
 {
     public function index()
     {
-        return 'User. Страница списка постов';
+        $post = (object)[
+            'id' => 1,
+            'title' => 'Post 1',
+            'content' => 'Контент поста для того, чтобы почитать'
+        ];
+
+        $posts = array_fill(0, 10, $post);
+
+        $title = 'Мои посты';
+
+        return view('user.posts.index',compact('posts','title'));
     }
 
     public function create()
     {
-        return 'User. Страница создания поста';
+        return view('user.posts.create');
     }
 
     public function store(Request $request)
@@ -22,14 +32,30 @@ class    PostController extends Controller
         return 'User. Запрос создания поста';
     }
 
-    public function show(string $id_post)
+    public function show($post)
     {
-        return "User. Страница поста №{$id_post}";
+        $post = (object)[
+            'id' => 1,
+            'title' => 'Пользователь. Смысл жизни',
+            'content' => "
+            О, внемлите, сударь!
+            <br/><br/>
+            Жизнь - сие дивное мгновение меж двух вечностей, дарованное нам для творения добра, познания красоты мироздания и дарования любви ближним. В сей краткий миг надлежит нам оставить след светлый, подобно звезде, что сияет во тьме!
+            <br/><br/>
+            Позвольте выразить сию мысль в стихах:<br/><br/>
+
+            В круговороте дней земных<br/>
+            Есть высший смысл, незримый глазу:<br/>
+            Творить, любить, дарить другим<br/>
+            Души божественную фразу!"
+        ];
+
+        return view('user.posts.show', compact('post'));
     }
 
-    public function edit(string $id_post)
+    public function edit($post)
     {
-        return "User. Страница редактирования поста №{$id_post}.";
+        return view('user.posts.edit', compact('post'));
     }
 
     public function update(Request $request, string $id_post)

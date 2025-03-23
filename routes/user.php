@@ -5,10 +5,11 @@ use Illuminate\Support\Facades\Route;
 
 
 // Контроллер для ПОСТОВ пользователя
-Route::prefix('user')->middleware(['auth', 'active_user'])->group(function () {
+//Route::prefix('user')->middleware(['auth', 'active_user'])->group(function () {
+Route::prefix('user')->group(function () {
     Route::redirect('/', '/user/posts')->name('user');
     // CRUD (Create, Read, Update, Delete
-    Route::get('/posts', [PostController::class, 'index'])->name('user.posts.index');
+    Route::get('/posts', [PostController::class, 'index'])->name('user.posts');
     Route::get('/posts/create', [PostController::class, 'create'])->name('user.posts.create');
     Route::post('/posts', [PostController::class, 'store'])->name('user.posts.store');
     Route::get('/posts/{post}', [PostController::class, 'show'])->name('user.posts.show');

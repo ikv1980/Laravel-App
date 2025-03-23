@@ -126,7 +126,7 @@ $middleware->alias([
 ]);
 // в файле `routes\web.php`
 Route::middleware(['my_log'])->group(function () {
-    Route::get('blog', [BlogController::class, 'index'])->name('blog.index');
+    Route::get('blog', [BlogController::class, 'index'])->name('blog');
     Route::get('blog/{blog}', [BlogController::class, 'show'])->name('blog.show');
     Route::put('blog/{blog}/like', [BlogController::class, 'like'])->name('blog.like');
 });
