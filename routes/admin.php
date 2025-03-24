@@ -13,7 +13,7 @@ Route::prefix('admin')->middleware(['auth', 'active_user', 'active_admin'])->gro
     Route::post('/posts', [PostController::class, 'store'])->name('admin.posts.store');
     Route::get('/posts/{post}', [PostController::class, 'show'])->name('admin.posts.show');
     Route::get('/posts/{post}/edit', [PostController::class, 'edit'])->name('admin.posts.edit');
-    Route::patch('/posts/{post}', [PostController::class, 'update'])->name('admin.posts.update');
+    Route::put('/posts/{post}', [PostController::class, 'update'])->name('admin.posts.update');
     Route::delete('/posts/{post}', [PostController::class, 'destroy'])->name('admin.posts.destroy');
     Route::put('/posts/{post}/like', [PostController::class, 'like'])->name('admin.posts.like');
 });

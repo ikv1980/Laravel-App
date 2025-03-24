@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 
 class    PostController extends Controller
 {
+    // Просмотр списка постов (GET)
     public function index()
     {
         $post = (object)[
@@ -22,16 +23,24 @@ class    PostController extends Controller
         return view('user.posts.index',compact('posts','title'));
     }
 
+    // Форма для создания поста (GET)
     public function create()
     {
         return view('user.posts.create');
     }
 
+    // Страница метода создание поста (POST)
     public function store(Request $request)
     {
-        dd($request->all());
+        $title = $request->input('title');
+        $content = $request->input('content');
+
+        dd($title,$content);
+
+        return 'Пользователь вошел в систему';
     }
 
+    // Форма для отображения поста № (GET)
     public function show($post)
     {
         $post = (object)[
@@ -53,6 +62,7 @@ class    PostController extends Controller
         return view('user.posts.show', compact('post'));
     }
 
+    // Форма для редактирования поста № (GET)
     public function edit($post)
     {
         $post = (object)[
@@ -74,17 +84,24 @@ class    PostController extends Controller
         return view('user.posts.edit', compact('post'));
     }
 
-    public function update(Request $request, string $id_post)
+    // Страница метода обновления (редактирования) поста (PATCH)
+    public function update(Request $request, $post)
     {
-        dd($request->all());
+        $title = $request->input('title');
+        $content = $request->input('content');
+
+        dd($title,$content);
+
         return "User. Страница обновления поста №{$id_post}.";
     }
 
+    // Страница метода удаления поста (DELETE)
     public function destroy(string $id_post)
     {
         return "User. Страница удаления поста {$id_post}";
     }
 
+    // Страница метода добавления лайка (PUT)
     public function like(): string
     {
         return 'User. Лайк поста + 1';

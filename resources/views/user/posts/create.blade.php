@@ -14,6 +14,6 @@
     </x-page-title>
 
     {{--Форма создания поста--}}
-    <x-post.form action="{{route('user.posts.store')}}"/>
+    <x-post.form action="{{route('user.posts.store')}}" method="post" />
 
 @endsection

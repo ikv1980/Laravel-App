@@ -14,6 +14,6 @@
     </x-page-title>
 
     {{--Форма редактирования поста--}}
-    <x-post.form action="{{route('user.posts.edit', $post->id)}}" :post="$post" />
+    <x-post.form action="{{route('user.posts.update', $post->id)}}" method="put" :post="$post" />
 
 @endsection

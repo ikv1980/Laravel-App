@@ -1,6 +1,6 @@
 @props(['post'=>null])
 
-<x-form {{$attributes}} method="POST">
+<x-form {{$attributes}}>
     <x-card-item>
         <x-label required>{{__('Название поста')}}</x-label>
         <x-input type="text" value="{{$post->title ?? ''}}" name="title" autofocus/>

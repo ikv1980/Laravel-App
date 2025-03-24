@@ -18,7 +18,7 @@
                 <x-input type="password" name="password"/>
             </x-card-item>
             <x-card-item>
-                <x-checkbox>
+                <x-checkbox name="remember" value="1">
                     {{__('Запомнить меня')}}
                 </x-checkbox>
             </x-card-item>

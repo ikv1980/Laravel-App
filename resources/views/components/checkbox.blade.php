@@ -10,8 +10,9 @@
         'form-check-input'
     ])->merge([
         'value' => 1,
-    ]) }} type="checkbox" name="remember" id={{ $id }} />
+    ]) }} type="checkbox" id={{ $id }} />
     <label class="form-check-label" for={{ $id }}>
         {{ $slot }}
     </label>
 </div>
+

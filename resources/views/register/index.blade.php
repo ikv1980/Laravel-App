@@ -36,7 +36,7 @@
                     <x-input type="password" name="password_confirmation"/>
                 </x-card-item>
                 <x-card-item>
-                    <x-checkbox>
+                    <x-checkbox name="agreement" value="1">
                         {{__('Согласие на обработку пользовательских данных')}}
                     </x-checkbox>
                 </x-card-item>
