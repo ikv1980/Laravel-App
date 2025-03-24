@@ -8,9 +8,15 @@
         {{$post->title}}
 
         <x-slot name="link">
-            <a href="{{route('blog')}}" class="href">
+            <a href="{{route('user.posts')}}" class="href">
                 {{__('Назад')}}
             </a>
+        </x-slot>
+
+        <x-slot name="right">
+            <x-button-link href="{{ route('user.posts.edit', $post->id) }}">
+                {{__('Изменить пост')}}
+            </x-button-link>
         </x-slot>
 
     </x-page-title>

@@ -11,7 +11,7 @@ class    PostController extends Controller
     {
         $post = (object)[
             'id' => 1,
-            'title' => 'Post 1',
+            'title' => 'Пост пользователя',
             'content' => 'Контент поста для того, чтобы почитать'
         ];
 
@@ -29,7 +29,7 @@ class    PostController extends Controller
 
     public function store(Request $request)
     {
-        return 'User. Запрос создания поста';
+        dd($request->all());
     }
 
     public function show($post)
@@ -55,7 +55,8 @@ class    PostController extends Controller
 
     public function edit($post)
     {
-        return view('user.posts.edit', compact('post'));
+        return view('user.posts.edit');
+//        return view('user.posts.edit', compact('post'));
     }
 
     public function update(Request $request, string $id_post)

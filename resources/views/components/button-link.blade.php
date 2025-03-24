@@ -1,5 +1,5 @@
 <a {{ $attributes  }}>
     <x-button>
-        {{__('Создать')}}
+        {{ $slot }}
     </x-button>
 </a>

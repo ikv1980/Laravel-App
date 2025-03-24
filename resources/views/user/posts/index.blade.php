@@ -18,11 +18,16 @@
     @else
         <div class="row row-gap-3">
             @foreach($posts as $post)
-
-                <div class="col-12 col-md-3">
-                    <x-blog.card :post="$post"/>
+                <div class="mb-3">
+                    <h2 class="h6">
+                        <a href="{{route('user.posts.show', $post->id)}}">
+                            {{ $post->title }}
+                        </a>
+                    </h2>
+                    <p class="small text-muted">
+                        ({{ now()->format('d.m.Y H:i:s')}})
+                    </p>
                 </div>
-
             @endforeach
         </div>
     @endif

@@ -7,7 +7,7 @@
     <x-page-title>
         {{'Создание поста'}}
         <x-slot name="link">
-            <a href="{{route('user.posts')}}" class="href">
+            <a href="{{route('user.posts.show', $post->id)}}" class="href">
                 {{__('Назад')}}
             </a>
         </x-slot>
