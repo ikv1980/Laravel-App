@@ -3,4 +3,3 @@
 ])->merge([
     'type' => 'text'
 ]) }}/>
-{{ $slot }}

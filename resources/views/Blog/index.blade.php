@@ -14,7 +14,7 @@
         <div class="row row-gap-3">
             @foreach($posts as $post)
                 <div class="col-12 col-md-3">
-                    <x-blog.card :post="$post"/>
+                    <x-post.card :post="$post"/>
                 </div>
             @endforeach
         </div>
