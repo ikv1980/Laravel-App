@@ -7,21 +7,46 @@ use Illuminate\Http\Request;
 
 class BlogController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
+        // Добавляем фильтр. Добавили Request
+        $search = $request->input('search');
+        $category_id = $request->input('category_id');
+
+        // Тестовый пост
         $post = (object)[
             'id' => 1,
-            'title' => 'Post 1',
-            'content' => 'Контент поста для того, чтобы почитать'
+            'title' => 'Блог об учебе',
+            'content' => 'Контент блога для того, чтобы почитать'
         ];
 
+        // Создаем массив из 10 одинаковых постов
         $posts = array_fill(0, 10, $post);
-        //dd($posts);
 
+        // Фильтруем посты, с учетом GET запроса
+        $posts = array_filter($posts, callback: function ($post) use ($search, $category_id) {
+            // Проверка по тексту в посте (тема или содержание)
+            if($search && mb_stripos($post->title, $search) === false){
+                return false;
+            }
+            // Проверка по id поста
+            if($category_id && $post->id != $category_id){
+                return false;
+            }
+            return true;
+        });
 
         $title = 'Блог. Посты';
 
-        return view('blog.index', compact('posts', 'title'));
+        // Фильтры для категорий с бека
+        $categories = [
+            null=>__('Все категории'),
+            '1'=>__('Категория 1'),
+            '2'=>__('Категория 2'),
+            '3'=>__('Категория 3'),
+            ];
+
+        return view('blog.index', compact('posts', 'title', 'categories'));
 
 //        return view('blog.index')
 //            ->with('posts', $posts)
@@ -62,7 +87,7 @@ class BlogController extends Controller
             Есть высший смысл, незримый глазу:<br/>
             Творить, любить, дарить другим<br/>
             Души божественную фразу!"
-          ];
+        ];
 
         return view('blog.show', compact('post'));
     }

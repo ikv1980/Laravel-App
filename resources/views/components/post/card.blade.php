@@ -2,7 +2,7 @@
     <x-card-body>
         <h5>
             <a href="{{route('blog.show', $post->id)}}">
-                Пост №{{$post->id}}
+                {{$post->title}}
             </a>
         </h5>
         <p>
