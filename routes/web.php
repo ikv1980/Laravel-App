@@ -32,7 +32,7 @@ Route::middleware(['my_log'])->group(function () {
 Route::resource('/posts/{post}/comments', CommentController::class)->only(['index', 'edit', 'show']);
 
 // Тестовый контроллер - удалить
-Route::get('/test', [TestController::class, 'index'])->name('test')->middleware(\App\Http\Middleware\LogMiddleware::class);
+Route::get('/test', TestController::class)->name('test');
 
 // Используется, если никакой маршрут не подошел. Размещать в самом низу
 Route::fallback(function () {

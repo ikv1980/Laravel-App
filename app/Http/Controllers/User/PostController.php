@@ -32,12 +32,11 @@ class    PostController extends Controller
     // Страница метода создание поста (POST)
     public function store(Request $request)
     {
-        $title = $request->input('title');
-        $content = $request->input('content');
+        //$title = $request->input('title');
+        //$content = $request->input('content');
+        //dd($title,$content);
 
-        dd($title,$content);
-
-        return 'Пользователь вошел в систему';
+        return redirect()->route('user.posts.show', 111);
     }
 
     // Форма для отображения поста № (GET)
@@ -87,18 +86,18 @@ class    PostController extends Controller
     // Страница метода обновления (редактирования) поста (PATCH)
     public function update(Request $request, $post)
     {
-        $title = $request->input('title');
-        $content = $request->input('content');
+        //$title = $request->input('title');
+        //$content = $request->input('content');
+        //dd($title,$content);
 
-        dd($title,$content);
-
-        return "User. Страница обновления поста №{$id_post}.";
+        return redirect()->route('user.posts.show', $post);
     }
 
     // Страница метода удаления поста (DELETE)
     public function destroy(string $id_post)
     {
-        return "User. Страница удаления поста {$id_post}";
+        return redirect()->route('user.posts');
+        //return "User. Страница удаления поста {$id_post}";
     }
 
     // Страница метода добавления лайка (PUT)

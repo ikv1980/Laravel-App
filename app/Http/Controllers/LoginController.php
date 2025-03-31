@@ -18,12 +18,13 @@ class LoginController extends Controller
 //        $url = $request->url();
 //        dd($ip, $path, $url);
 
-        $email = $request->input('email');
-        $password = $request->input('password');
-        $remember = $request->boolean('remember');
+//        $email = $request->input('email');
+//        $password = $request->input('password');
+//        $remember = $request->boolean('remember');
+//
+//        dd($email,$password,$remember);
 
-        dd($email,$password,$remember);
-
-//        return 'Пользователь вошел в систему';
+        // Редирект на страницу пользователя
+        return redirect()->route('user');
     }
 }

@@ -20,10 +20,10 @@ class RegisterController extends Controller
         // Получение всех, кроме
         // $data = $request->except('_token');
         // Получение значения поля
-        $name = $request->input('name');
-        $email = $request->input('email');
-        $password = $request->input('password');
-        $agreement = $request->boolean('agreement');
+        //$name = $request->input('name');
+        //$email = $request->input('email');
+        //$password = $request->input('password');
+        //$agreement = $request->boolean('agreement');
 
         //$file = $request->file('file');
         // Проверка существования поля
@@ -37,7 +37,9 @@ class RegisterController extends Controller
             dd($name);
         }
         */
-        dd($name,$email,$password,$agreement);
-        return 'Регистрация';
+        //dd($name,$email,$password,$agreement);
+
+        // Редирект на страницу входа.
+        return redirect('login');
     }
 }
