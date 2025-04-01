@@ -10,6 +10,7 @@
         'form-check-input'
     ])->merge([
         'value' => 1,
+        'checked' => !! old($attributes->get('name'))
     ]) }} type="checkbox" id={{ $id }} />
     <label class="form-check-label" for={{ $id }}>
         {{ $slot }}

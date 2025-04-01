@@ -10,5 +10,5 @@
         {{--Поле ввода текст а с редактором Trix--}}
         <x-trix name="content" value="{{$post->content ?? ''}}"/>
     </x-card-item>
-    <x-button type="submit">{{__('Сохранить')}}</x-button>
+    {{ $slot }}
 </x-form>

@@ -24,6 +24,10 @@ class LoginController extends Controller
 //
 //        dd($email,$password,$remember);
 
+        // Валидация данных
+        if(false){
+            return redirect()->back()->withInput();
+        }
         // Редирект на страницу пользователя
         return redirect()->route('user');
     }

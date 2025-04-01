@@ -39,6 +39,10 @@ class RegisterController extends Controller
         */
         //dd($name,$email,$password,$agreement);
 
+        // Валидация данных
+        if(true){
+            return redirect()->back()->withInput();
+        }
         // Редирект на страницу входа.
         return redirect('login');
     }

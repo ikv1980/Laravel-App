@@ -90,7 +90,9 @@ class    PostController extends Controller
         //$content = $request->input('content');
         //dd($title,$content);
 
-        return redirect()->route('user.posts.show', $post);
+        //return redirect()->route('user.posts.show', $post);
+        // аналог
+        return redirect()->back();
     }
 
     // Страница метода удаления поста (DELETE)
