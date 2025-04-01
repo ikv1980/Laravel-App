@@ -8,6 +8,16 @@ class LoginController extends Controller
 {
     public function index()
     {
+        //$data = session('lastname');
+        //Получение всех данных сессии
+        dd(session()->all());
+
+        //Проверка на наличие данных в сессии
+        //dd(session()->has('lastname'));
+        if($test = session('firstname')){
+            dd($test);
+        }
+
         return view('login.index');
     }
 
@@ -24,8 +34,20 @@ class LoginController extends Controller
 //
 //        dd($email,$password,$remember);
 
+        // Работа с сессиями
+        session([
+            'firstname'=> 'Konstantin',
+            'lastname'=> 'Ivanov',
+        ]);
+
+        //Удаление данных сессии по ключу
+        session()->forget('value');
+        session()->flush();
+
+
+
         // Валидация данных
-        if(false){
+        if(true){
             return redirect()->back()->withInput();
         }
         // Редирект на страницу пользователя
