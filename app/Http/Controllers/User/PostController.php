@@ -35,7 +35,7 @@ class    PostController extends Controller
         //$title = $request->input('title');
         //$content = $request->input('content');
         //dd($title,$content);
-
+        message(__('Пост успешно создан'), 'alert-primary');
         return redirect()->route('user.posts.show', 111);
     }
 
@@ -92,6 +92,7 @@ class    PostController extends Controller
 
         //return redirect()->route('user.posts.show', $post);
         // аналог
+        message(__('Пост успешно изменен'), 'alert-info');
         return redirect()->back();
     }
 

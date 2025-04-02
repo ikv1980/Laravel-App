@@ -10,7 +10,7 @@ class LoginController extends Controller
     {
         //$data = session('lastname');
         //Получение всех данных сессии
-        dd(session()->all());
+        //dd(session()->all());
 
         //Проверка на наличие данных в сессии
         //dd(session()->has('lastname'));
@@ -35,16 +35,14 @@ class LoginController extends Controller
 //        dd($email,$password,$remember);
 
         // Работа с сессиями
-        session([
-            'firstname'=> 'Konstantin',
-            'lastname'=> 'Ivanov',
-        ]);
+//        session([
+//            'alert'=> __('Добро пожаловать в систему'),
+//            'alert_style'=> 'alert-success',
+//        ]);
+        message(__('Добро пожаловать в систему'), 'alert-success');
 
         //Удаление данных сессии по ключу
-        session()->forget('value');
-        session()->flush();
-
-
+        //session()->forget('value');
 
         // Валидация данных
         if(true){
