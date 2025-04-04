@@ -20,7 +20,7 @@ class    PostController extends Controller
 
         $title = 'Мои посты';
 
-        return view('user.posts.index',compact('posts','title'));
+        return view('user.posts.index', compact('posts', 'title'));
     }
 
     // Форма для создания поста (GET)
@@ -35,6 +35,21 @@ class    PostController extends Controller
         //$title = $request->input('title');
         //$content = $request->input('content');
         //dd($title,$content);
+
+        // Валидация данных сразу через equest
+        //$validator = validator($request->all(),[
+        //    'title' => ['required','string','max:100'],
+        //    'content' => ['required', 'string']
+        //])->validate();
+
+        // сокращение кода через хелпер-валидатор
+        $validator = validate($request->all(), [
+            'title' => ['required', 'string', 'max:100'],
+            'content' => ['required', 'string']
+        ]);
+
+        //dd($validator);
+
         message(__('Пост успешно создан'), 'alert-primary');
         return redirect()->route('user.posts.show', 111);
     }
