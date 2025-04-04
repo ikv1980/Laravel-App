@@ -9,6 +9,7 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
+    protected $connection = 'my_database';
     public function up(): void
     {
         Schema::create('posts', function (Blueprint $table) {

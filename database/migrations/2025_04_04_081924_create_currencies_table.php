@@ -12,17 +12,15 @@ return new class extends Migration
     protected $connection = 'my_database';
     public function up(): void
     {
-        Schema::create('users', function (Blueprint $table) {
-            $table->id()->from(1001);
+        Schema::create('currencies', function (Blueprint $table) {
+            $table->string('id')->unique();
             $table->timestamps();
 
             $table->string('name');
-            $table->string('email')->unique();
-            $table->string('avatar')->nullable();
-            $table->boolean('active')->default(false);
-
-            $table->string('password');
-            $table->rememberToken();
+            $table->decimal('price')->unsigned();
+            $table->boolean('active')->default(true);
+            $table->timestamp('active_at')->nullable();
+            $table->integer('sort')->unsigned()->default(999);
         });
     }
 
@@ -31,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('currencies');
     }
 };
