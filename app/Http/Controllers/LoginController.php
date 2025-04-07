@@ -39,6 +39,13 @@ class LoginController extends Controller
 //            'alert'=> __('Добро пожаловать в систему'),
 //            'alert_style'=> 'alert-success',
 //        ]);
+
+        // сокращение кода через хелпер-валидатор
+        $validator = validate($request->all(), [
+            'email' => ['required', 'string', 'email'],
+            'password' => ['required', 'min:8']
+        ]);
+
         message(__('Добро пожаловать в систему'), 'alert-success');
 
         //Удаление данных сессии по ключу
