@@ -1,5 +1,4 @@
 @props(['post'=>null])
-
 <x-form {{$attributes}}>
     <x-card-item>
         <x-label required>{{__('Название поста')}}</x-label>
@@ -12,5 +11,7 @@
         <x-trix name="content" value="{{$post->content ?? ''}}"/>
         <x-error name="content"/>
     </x-card-item>
+    {{--Вывод кастомного сообщения--}}
+    <x-error name="account"/>
     {{ $slot }}
 </x-form>

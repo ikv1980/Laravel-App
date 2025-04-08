@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Models\Post;
+use Illuminate\Validation\ValidationException;
 use Illuminate\Http\Request;
 
 class    PostController extends Controller
@@ -47,6 +49,13 @@ class    PostController extends Controller
             'title' => ['required', 'string', 'max:100'],
             'content' => ['required', 'string']
         ]);
+
+        // Кастомное сообщение об ошибке
+        //if(false){
+        //    throw ValidationException::withMessages([
+        //        'account' =>__('Какое-то информационное сообщение'),
+        //    ]);
+        //}
 
         //dd($validator);
 
@@ -104,10 +113,11 @@ class    PostController extends Controller
         //$title = $request->input('title');
         //$content = $request->input('content');
         //dd($title,$content);
+        $validator = validate($request->all(), Post::getRules());
+        message(__('Пост успешно изменен'), 'alert-info');
 
         //return redirect()->route('user.posts.show', $post);
         // аналог
-        message(__('Пост успешно изменен'), 'alert-info');
         return redirect()->back();
     }
 

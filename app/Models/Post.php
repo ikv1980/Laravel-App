@@ -25,4 +25,11 @@ class Post extends Model
         'published' => 'boolean',
         'published_at' => 'datetime',
     ];
+
+    public static function getRules(): array{
+        return  [
+            'title' => ['required', 'string', 'max:100'],
+            'content' => ['required', 'string']
+        ];
+    }
 }
