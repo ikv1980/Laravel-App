@@ -1,5 +1,5 @@
-<input type="hidden" {{$attributes}}  id="{{$name}}" >
-<trix-editor input="{{$name}}" style="min-height: 200px;"></trix-editor>
+<input type="hidden" {{$attributes}}  id="{{$attributes->get('name')}}" >
+<trix-editor input="{{$attributes->get('name')}}" style="min-height: 200px;"></trix-editor>
 
 @once
     {{--Файлы расположены через npm CDN--}}
