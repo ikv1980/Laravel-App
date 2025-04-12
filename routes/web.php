@@ -5,6 +5,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\Posts\CommentController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\TestController;
+use App\Http\Controllers\ValidationController;
 use Illuminate\Support\Facades\Route;
 
 // Главная страница
@@ -33,6 +34,10 @@ Route::resource('/posts/{post}/comments', CommentController::class)->only(['inde
 
 // Тестовый контроллер - удалить
 Route::get('/test', TestController::class)->name('test');
+
+// контроллер Валидации - удалить
+Route::get('valid', [ValidationController::class, 'index'])->name('valid');
+Route::post('valid', [ValidationController::class, 'store'])->name('valid.store');
 
 // Используется, если никакой маршрут не подошел. Размещать в самом низу
 Route::fallback(function () {
