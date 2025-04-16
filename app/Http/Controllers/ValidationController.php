@@ -43,16 +43,16 @@ class ValidationController extends Controller
             //'birth_date' => ['nullable', 'string', 'date'], // 2021-10-09/09-10-2021 12:30:00
             'start_date' => ['required', 'string', 'date', 'after_or_equal:today'],
             'finish_date' => ['required', 'string', 'date', 'after:start_date'],
-            'services' => ['nullable', 'array', 'min:1', 'max:10'], // [1,2,3,4,5]
-            'services.*' => ['required', 'integer'], // [1,2,3,4,5]
-            'delivery' => ['required', 'array', 'size:2'], // ['date' => '2021-10-09', 'time' => '12:30:00']
-            'delivery.date' => ['required', 'string', 'date_format:Y.m.d'], // 2021-10-09
-            'delivery.time' => ['required', 'string', 'date_format:H:i:s'], // 12:30:00
-            'secret' => ['required', 'string', function ($attribute, $value, \Closure $fail) {
-                if ($value !== config('example.secret')) {
-                    $fail(__('Неверный секретный ключ.'));
-                }
-            }],
+            //'services' => ['nullable', 'array', 'min:1', 'max:10'], // [1,2,3,4,5]
+            //'services.*' => ['required', 'integer'], // [1,2,3,4,5]
+            //'delivery' => ['required', 'array', 'size:2'], // ['date' => '2021-10-09', 'time' => '12:30:00']
+            //'delivery.date' => ['required', 'string', 'date_format:Y.m.d'], // 2021-10-09
+            //'delivery.time' => ['required', 'string', 'date_format:H:i:s'], // 12:30:00
+            //'secret' => ['required', 'string', function ($attribute, $value, \Closure $fail) {
+            //    if ($value !== config('example.secret')) {
+            //        $fail(__('Неверный секретный ключ.'));
+            //    }
+            //}],
         ]);
 
         dd($validated);
