@@ -13,6 +13,14 @@ class RegisterController extends Controller
 
     public function store(Request $request)
     {
+        $validatedData = $request->validate([
+            'name' => ['required', 'string', 'max:100'],
+            'email' => ['required', 'string', 'email', 'max:50', 'unique:users'],
+            'password' => ['required', 'string', 'min:8', 'max:50', 'confirmed'],
+            'agreement' => ['required', 'accepted'],
+        ]);
+
+        dd($validatedData);
         // Получение всех данных
         //$data = $request->all();
         // Получение данных по списку
