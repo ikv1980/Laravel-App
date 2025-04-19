@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class RegisterController extends Controller
@@ -13,6 +14,7 @@ class RegisterController extends Controller
 
     public function store(Request $request)
     {
+        // Правила валидации
         $validatedData = $request->validate([
             'name' => ['required', 'string', 'max:100'],
             'email' => ['required', 'string', 'email', 'max:50', 'unique:users'],
@@ -20,7 +22,24 @@ class RegisterController extends Controller
             'agreement' => ['required', 'accepted'],
         ]);
 
-        dd($validatedData);
+        // ПЕРВЫЙ СПОСОБ. Создаем объект, вносим данные и сохраняем
+        //$user = new User;
+        //$user->name = $validatedData['name'];
+        //$user->email = $validatedData['email'];
+        //$user->password = $validatedData['password'];
+        ////$user->password = bcrypt($validatedData['password']);
+        ////$user->password = Hash::make($validatedData['password']);
+        //$user->save();
+
+        // ВТОРОЙ СПОСОБ
+        $user = User::query()->create([
+            'name' => $validatedData['name'],
+            'email' => $validatedData['email'],
+            'password' => $validatedData['password'],
+        ]);
+
+        dd($user);
+
         // Получение всех данных
         //$data = $request->all();
         // Получение данных по списку
