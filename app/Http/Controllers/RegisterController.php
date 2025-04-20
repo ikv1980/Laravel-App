@@ -14,7 +14,7 @@ class RegisterController extends Controller
 
     public function store(Request $request)
     {
-        // Правила валидации
+        // Правила валидации данных
         $validatedData = $request->validate([
             'name' => ['required', 'string', 'max:100'],
             'email' => ['required', 'string', 'email', 'max:50', 'unique:users'],

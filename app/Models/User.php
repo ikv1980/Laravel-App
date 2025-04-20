@@ -23,13 +23,13 @@ class User extends Authenticatable
     // Данные, которые не будут пропускаться в БД
     protected $guarded = [];
 
-    // поля что должны быть скрыты (см. маршрут в API)
+    // Поля что должны быть скрыты (см. Маршрут в API)
     protected $hidden = [
         'password',
         'remember_token',
     ];
 
-    // приведение данных к нужным типам (пароль будет хешироваться)
+    // приведение данных к нужным типам (пароль будет хэшироваться)
     protected function casts(): array
     {
         return [
