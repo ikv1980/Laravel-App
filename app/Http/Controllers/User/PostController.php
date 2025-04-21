@@ -38,7 +38,7 @@ class    PostController extends Controller
         //$content = $request->input('content');
         //dd($title,$content);
 
-        // Валидация данных сразу через equest
+        // Валидация данных сразу через request
         //$validator = validator($request->all(),[
         //    'title' => ['required','string','max:100'],
         //    'content' => ['required', 'string']
@@ -58,6 +58,10 @@ class    PostController extends Controller
         //}
 
         //dd($validator);
+
+
+
+
 
         message(__('Пост успешно создан'), 'alert-primary');
         return redirect()->route('user.posts.show', 111);
