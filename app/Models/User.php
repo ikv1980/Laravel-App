@@ -14,13 +14,18 @@ use Illuminate\Notifications\Notifiable;
  * @property bool $admin
  * @property bool $active
  */
-
 class User extends Authenticatable
 {
     use HasFactory, Notifiable;
 
     // Указание какое соединение используем
     protected $connection = 'my_database';
+
+    // Значения по умолчанию
+    protected $attributes = [
+        'active' => true,
+        'admin' => false,
+    ];
 
     // Описание свойств модели. Удобно видеть поля в БД -> будет пропускать только эти поля то что нужно вносить
     protected $fillable = [
@@ -41,7 +46,14 @@ class User extends Authenticatable
     protected function casts(): array
     {
         return [
+            'name' => 'string',
+            'email' => 'string',
+            'avatar' => 'string',
+            'active' => 'boolean',
+            'admin' => 'boolean',
             'password' => 'hashed',
+            'created_at' => 'datetime',
+            'updated_at' => 'datetime',
         ];
     }
 }

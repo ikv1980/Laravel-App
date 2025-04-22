@@ -11,6 +11,16 @@
         <x-trix name="content" value="{{$post->content ?? ''}}"/>
         <x-error name="content"/>
     </x-card-item>
+    <x-card-item>
+        <x-label required>{{__('Дата публикации')}}</x-label>
+        {{--Поле ввода текст а с редактором Trix--}}
+        <x-input type="date" name="published_at" value="{{$post->published_at ?? ''}}"/>
+    </x-card-item>
+    <x-card-item>
+        <x-checkbox name="published">
+            {{__('Опубликовано')}}
+        </x-checkbox>
+    </x-card-item>
     {{--Вывод кастомного сообщения--}}
     <x-error name="account"/>
     {{ $slot }}

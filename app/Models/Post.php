@@ -34,6 +34,19 @@ class Post extends Model
         'published_at' => 'datetime',
     ];
 
+    protected function casts(): array
+    {
+        return [
+            'user_id' => 'integer',
+            'published' => 'boolean',
+            'published_at' => 'datetime',
+        ];
+    }
+
+
+
+
+
     public static function getRules(): array{
         return  [
             'title' => ['required', 'string', 'max:100'],

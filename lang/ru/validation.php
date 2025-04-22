@@ -223,6 +223,7 @@ return [
         'name' => 'Название',
         'password' => 'Пароль',
         'password_confirmation' => 'Подтверждение пароля',
+        'published_at' => 'Дата',
         'phone' => 'Телефон',
         'remember_me' => 'Запомнить меня',
         'second' => 'Секунда',

@@ -47,7 +47,9 @@ class    PostController extends Controller
         // сокращение кода через хелпер-валидатор
         $validator = validate($request->all(), [
             'title' => ['required', 'string', 'max:100'],
-            'content' => ['required', 'string']
+            'content' => ['required', 'string'],
+            'published_at' => ['required', 'string', 'date'],
+            '$published' => ['nullable', 'boolean'],
         ]);
 
         // Кастомное сообщение об ошибке
