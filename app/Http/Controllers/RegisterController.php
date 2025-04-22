@@ -23,7 +23,7 @@ class RegisterController extends Controller
         ]);
 
         // ПЕРВЫЙ СПОСОБ. Создаем объект, вносим данные и сохраняем
-        //$user = new User;
+        $user = new User;
         //$user->name = $validatedData['name'];
         //$user->email = $validatedData['email'];
         //$user->password = $validatedData['password'];
@@ -31,14 +31,16 @@ class RegisterController extends Controller
         ////$user->password = Hash::make($validatedData['password']);
         //$user->save();
 
-        // ВТОРОЙ СПОСОБ
-        $user = User::query()->create([
-            'name' => $validatedData['name'],
-            'email' => $validatedData['email'],
-            'password' => $validatedData['password'],
-        ]);
-
-        dd($user);
+        // ВТОРОЙ СПОСОБ - если email есть, то запись не создастся
+        //$user = User::query()->create([
+        $user = User::query()->firstOrCreate(
+            [
+                'email' => $validatedData['email'],
+            ],[
+                'name' => $validatedData['name'],
+                'password' => $validatedData['password'],
+            ]
+        );
 
         // Получение всех данных
         //$data = $request->all();

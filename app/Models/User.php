@@ -7,6 +7,14 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
+/**
+ * @property string $name
+ * @property string $email
+ * @property string $avatar
+ * @property bool $admin
+ * @property bool $active
+ */
+
 class User extends Authenticatable
 {
     use HasFactory, Notifiable;
@@ -14,7 +22,7 @@ class User extends Authenticatable
     // Указание какое соединение используем
     protected $connection = 'my_database';
 
-    // Описание свойств модели. Удобно видеть поля в БД -> будет пропускать только эти поля то что нужно вносить)
+    // Описание свойств модели. Удобно видеть поля в БД -> будет пропускать только эти поля то что нужно вносить
     protected $fillable = [
         'name', 'email', 'avatar',
         'active', 'admin', 'password',
