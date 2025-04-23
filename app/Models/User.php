@@ -8,6 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
 /**
+ * Описание свойств класса
  * @property string $name
  * @property string $email
  * @property string $avatar
