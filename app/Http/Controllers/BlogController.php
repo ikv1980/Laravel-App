@@ -2,26 +2,23 @@
 
 namespace App\Http\Controllers;
 
-use Faker\Provider\Lorem;
+use App\Models\Post;
 use Illuminate\Http\Request;
 
 class BlogController extends Controller
 {
     public function index(Request $request)
     {
+        /** @var Post $post */
+
         // Добавляем фильтр. Добавили Request
         $search = $request->input('search');
         $category_id = $request->input('category_id');
 
-        // Тестовый пост
-        $post = (object)[
-            'id' => 1,
-            'title' => 'Блог об учебе',
-            'content' => 'Контент блога для того, чтобы почитать'
-        ];
+        // Получаем посты
+        $posts = Post::all()->toArray();
 
-        // Создаем массив из 10 одинаковых постов
-        $posts = array_fill(0, 10, $post);
+        dd($posts);
 
         // Фильтруем посты, с учетом GET запроса
         $posts = array_filter($posts, callback: function ($post) use ($search, $category_id) {

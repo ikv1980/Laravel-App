@@ -69,7 +69,7 @@ class    PostController extends Controller
 
         ]);
 
-        // Фейклвые рандомные данные для таблицы
+        // Фейковые рандомные данные для таблицы
         //for ($i = 0; $i < 99; $i++) {
         //    $post = Post::query()->create([
         //        'user_id' => random_int(1001, 1018),
