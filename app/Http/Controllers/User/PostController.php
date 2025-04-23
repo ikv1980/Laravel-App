@@ -4,7 +4,8 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use App\Models\Post;
-use Illuminate\Validation\ValidationException;
+use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class    PostController extends Controller
@@ -48,8 +49,20 @@ class    PostController extends Controller
         $validator = validate($request->all(), [
             'title' => ['required', 'string', 'max:100'],
             'content' => ['required', 'string'],
-            'published_at' => ['required', 'string', 'date'],
-            '$published' => ['nullable', 'boolean'],
+            'published_at' => ['nullable', 'string', 'date'],
+            'published' => ['nullable', 'boolean'],
+        ]);
+
+        $post = Post::query()->firstOrCreate([
+            //'user_id' => Auth::id(),
+            'user_id' => User::query()->value('id'),
+            //'user_id' => USer::query()->first()->id,
+            'title' => $request->get('title'),
+        ], [
+            'content' => $validator['content'],
+            'published_at' => new Carbon($validator['published_at'] ?? null),
+            'published' => $validator['published'] ?? false,
+
         ]);
 
         // Кастомное сообщение об ошибке
@@ -59,14 +72,15 @@ class    PostController extends Controller
         //    ]);
         //}
 
-        //dd($validator);
-
-
-
-
-
-        message(__('Пост успешно создан'), 'alert-primary');
-        return redirect()->route('user.posts.show', 111);
+        // Проверяем, был ли создан новый пост
+        if ($post->wasRecentlyCreated) {
+            // Новый пост был создан
+            message(__('Новый пост успешно создан'), 'alert-success');
+        } else {
+            // Пост уже существовал
+            message(__('Пост с таким названием существует'), 'alert-warning');
+        }
+        return redirect()->route('user.posts.show', $post->id);
     }
 
     // Форма для отображения поста № (GET)

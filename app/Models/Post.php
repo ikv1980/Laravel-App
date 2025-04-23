@@ -2,14 +2,15 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 /**
  * @property string $title
  * @property string $content
- * @property bool $published
  * @property Carbon $published_at
+ * @property bool $published
  */
 
 class Post extends Model
@@ -21,17 +22,11 @@ class Post extends Model
     protected $fillable = [
         'user_id',
         'title', 'content',
-        'published', 'published_at',
+        'published_at', 'published',
     ];
 
     protected $hidden = [
         'created_at', 'updated_at',
-    ];
-
-    protected $casts = [
-        'user_id' => 'integer',
-        'published' => 'boolean',
-        'published_at' => 'datetime',
     ];
 
     protected function casts(): array
@@ -42,10 +37,6 @@ class Post extends Model
             'published_at' => 'datetime',
         ];
     }
-
-
-
-
 
     public static function getRules(): array{
         return  [

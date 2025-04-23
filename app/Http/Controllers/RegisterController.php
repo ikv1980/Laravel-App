@@ -17,11 +17,12 @@ class RegisterController extends Controller
         // Правила валидации данных
         $validatedData = $request->validate([
             'name' => ['required', 'string', 'max:100'],
-            'email' => ['required', 'string', 'email', 'max:50'],
+            'email' => ['required', 'string', 'email', 'max:50', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'max:50', 'confirmed'],
             'agreement' => ['required', 'accepted'],
         ]);
 
+        // Валидация Email на уникальность
         if (User::where('email', $validatedData['email'])->exists()) {
             return back()->withErrors(['email' => 'Пользователь с таким Email уже зарегистрирован.']);
         }
