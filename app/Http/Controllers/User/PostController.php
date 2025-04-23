@@ -7,6 +7,7 @@ use App\Models\Post;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Random\RandomException;
 
 class    PostController extends Controller
 {
@@ -33,6 +34,10 @@ class    PostController extends Controller
     }
 
     // Страница метода создание поста (POST)
+
+    /**
+     * @throws RandomException
+     */
     public function store(Request $request)
     {
         //$title = $request->input('title');
@@ -56,7 +61,6 @@ class    PostController extends Controller
         $post = Post::query()->firstOrCreate([
             //'user_id' => Auth::id(),
             'user_id' => User::query()->value('id'),
-            //'user_id' => USer::query()->first()->id,
             'title' => $request->get('title'),
         ], [
             'content' => $validator['content'],
@@ -64,6 +68,17 @@ class    PostController extends Controller
             'published' => $validator['published'] ?? false,
 
         ]);
+
+        // Фейклвые рандомные данные для таблицы
+        //for ($i = 0; $i < 99; $i++) {
+        //    $post = Post::query()->create([
+        //        'user_id' => random_int(1001, 1018),
+        //        'title' => fake()->sentence(),
+        //        'content' => fake()->paragraph(),
+        //        'published_at' => new Carbon(fake()->dateTimeBetween(now()->subYear(), now())),
+        //        'published' => boolval(random_int(0, 1)),
+        //    ]);
+        //};
 
         // Кастомное сообщение об ошибке
         //if(false){
