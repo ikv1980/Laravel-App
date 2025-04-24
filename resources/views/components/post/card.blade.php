@@ -1,15 +1,18 @@
 <x-card-frame>
     <x-card-body>
         <h5>
-            <a href="{{route('blog.show', $post->id)}}">
-                {{$post->title}}
+            <a href="{{ route('blog.show', $post->id) }}">
+                {{ \Illuminate\Support\Str::limit($post->title, 25) }}
             </a>
         </h5>
         <p>
-            {!! $post->content !!}
+            {{ \Illuminate\Support\Str::limit($post->title, 60) }}
+            {{--{!! $post->content !!}--}}
         </p>
         <p class="small text-muted">
-            ({{ now()->format('d.m.Y H:i:s')}})
+            {{ $post->published_at->format('d.m.Y H:i:s')}}
+            ({{ $post->published_at->diffForHumans()}})
         </p>
+        <p>{{$post->id}}</p>
     </x-card-body>
 </x-card-frame>

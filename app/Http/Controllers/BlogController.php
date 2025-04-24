@@ -11,37 +11,50 @@ class BlogController extends Controller
     {
         /** @var Post $post */
 
-        // Добавляем фильтр. Добавили Request
-        $search = $request->input('search');
-        $category_id = $request->input('category_id');
+        // Валидация
+        $validation = $request->validate([
+            'limit' => 'nullable|integer|min:1|max:100',
+            'page' => ['nullable', 'integer', 'min:1', 'max:100'],
+        ]);
 
-        // Получаем посты
-        $posts = Post::all()->toArray();
+        // Значения по умолчанию
+        $limit = $validation['limit'] ?? 12;
+        $page = $validation['page'] ?? 1;
+        $offset = $limit * ($page - 1);
 
-        dd($posts);
+        // Получаем посты (пагинация)
+        $posts = Post::query()
+            ->limit($limit)
+            ->offset($offset)
+            ->get(['id', 'title', 'published_at', 'published']);
 
-        // Фильтруем посты, с учетом GET запроса
-        $posts = array_filter($posts, callback: function ($post) use ($search, $category_id) {
-            // Проверка по тексту в посте (тема или содержание)
-            if($search && mb_stripos($post->title, $search) === false){
-                return false;
-            }
-            // Проверка по id поста
-            if($category_id && $post->id != $category_id){
-                return false;
-            }
-            return true;
-        });
 
-        $title = 'Блог. Посты';
+//        // Добавляем фильтр. Добавили Request
+//        $search = $request->input('search');
+//        $category_id = $request->input('category_id');
+//
+//        // Фильтруем посты, с учетом GET запроса
+//        $posts = array_filter($posts, callback: function ($post) use ($search, $category_id) {
+//            // Проверка по тексту в посте (тема или содержание)
+//            if ($search && mb_stripos($post->title, $search) === false) {
+//                return false;
+//            }
+//            // Проверка по id поста
+//            if ($category_id && $post->id != $category_id) {
+//                return false;
+//            }
+//            return true;
+//        });
 
         // Фильтры для категорий с бека
         $categories = [
-            null=>__('Все категории'),
-            '1'=>__('Категория 1'),
-            '2'=>__('Категория 2'),
-            '3'=>__('Категория 3'),
-            ];
+            null => __('Все категории'),
+            '1' => __('Категория 1'),
+            '2' => __('Категория 2'),
+            '3' => __('Категория 3'),
+        ];
+
+        $title = 'Блог. Посты';
 
         return view('blog.index', compact('posts', 'title', 'categories'));
 
