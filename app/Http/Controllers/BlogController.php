@@ -28,6 +28,13 @@ class BlogController extends Controller
             ->offset($offset)
             ->get(['id', 'title', 'published_at', 'published']);
 
+        $posts = Post::query()
+            ->paginate($limit,['id', 'title', 'published_at', 'published']);
+
+        $posts = Post::query()
+            //->orderBy('published_at', 'desc')
+            ->latest('published_at')
+            ->paginate($limit,['id', 'title', 'published_at', 'published']);
 
 //        // Добавляем фильтр. Добавили Request
 //        $search = $request->input('search');

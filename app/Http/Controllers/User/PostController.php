@@ -22,6 +22,9 @@ class    PostController extends Controller
 
         $posts = array_fill(0, 10, $post);
 
+
+
+
         $title = 'Мои посты';
 
         return view('user.posts.index', compact('posts', 'title'));

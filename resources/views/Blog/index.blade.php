@@ -21,6 +21,12 @@
                 </div>
             @endforeach
         </div>
+        <div class="pt-3">
+            {{ $posts->onEachSide(3)->links() }}
+        </div>
+        <div class="pt-3">
+            {{ $posts->links('pagination::simple-bootstrap-5') }}
+        </div>
     @endif
 
 @endsection
