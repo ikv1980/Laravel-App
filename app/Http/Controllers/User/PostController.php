@@ -7,6 +7,7 @@ use App\Models\Post;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Collection;
 use Random\RandomException;
 
 class    PostController extends Controller
@@ -14,6 +15,19 @@ class    PostController extends Controller
     // Просмотр списка постов (GET)
     public function index()
     {
+        // -------------------------------------------------------------------------------
+        // Работа с чанками (chunk). Для пакетной обработки данных.
+        // Применяется, когда у нас в БД очень много записей
+        $posts = Post::query()
+            ->latest('published_at')
+            ->chunk(10, function (Collection $posts) {
+                info('часть запроса chunk');
+                foreach ($posts as $post) {
+                    info("Обработка элемента {$post->id}");
+                }
+            });
+        // -------------------------------------------------------------------------------
+
         $user_id = random_int(1001, 1018);
         $user = User::query()
             ->where('id', $user_id)
