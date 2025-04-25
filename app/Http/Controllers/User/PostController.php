@@ -14,20 +14,21 @@ class    PostController extends Controller
     // Просмотр списка постов (GET)
     public function index()
     {
-        $post = (object)[
-            'id' => 1,
-            'title' => 'Пост пользователя',
-            'content' => 'Контент поста для того, чтобы почитать'
-        ];
+        $user_id = random_int(1001, 1018);
+        $user = User::query()
+            ->where('id', $user_id)
+            ->first(['id', 'name']);
 
-        $posts = array_fill(0, 10, $post);
+        $posts = Post::query()
+            //->orderBy('published_at', 'desc')
+            ->latest('published_at')
+            //->where('user_id', auth()->id())
+            ->where('user_id', $user->id)
+            ->paginate(5,['id', 'user_id', 'title', 'published_at', 'published']);
 
+        $title = 'Посты пользователя: ';
 
-
-
-        $title = 'Мои посты';
-
-        return view('user.posts.index', compact('posts', 'title'));
+        return view('user.posts.index', compact('posts', 'user', 'title'));
     }
 
     // Форма для создания поста (GET)
