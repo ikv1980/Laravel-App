@@ -103,61 +103,38 @@ class    PostController extends Controller
     }
 
     // Форма для отображения поста № (GET)
-    public function show($post)
+    public function show(Post $post)
     {
-        $post = (object)[
-            'id' => 1,
-            'title' => 'Пользователь. Смысл жизни',
-            'content' => "
-            О, внемлите, сударь!
-            <br/><br/>
-            Жизнь - сие дивное мгновение меж двух вечностей, дарованное нам для творения добра, познания красоты мироздания и дарования любви ближним. В сей краткий миг надлежит нам оставить след светлый, подобно звезде, что сияет во тьме!
-            <br/><br/>
-            Позвольте выразить сию мысль в стихах:<br/><br/>
-
-            В круговороте дней земных<br/>
-            Есть высший смысл, незримый глазу:<br/>
-            Творить, любить, дарить другим<br/>
-            Души божественную фразу!"
-        ];
-
         return view('user.posts.show', compact('post'));
     }
 
     // Форма для редактирования поста № (GET)
-    public function edit($post)
+    public function edit(Post $post)
     {
-        $post = (object)[
-            'id' => 1,
-            'title' => 'Пользователь. Смысл жизни',
-            'content' => "
-            О, внемлите, сударь!
-            <br/><br/>
-            Жизнь - сие дивное мгновение меж двух вечностей, дарованное нам для творения добра, познания красоты мироздания и дарования любви ближним. В сей краткий миг надлежит нам оставить след светлый, подобно звезде, что сияет во тьме!
-            <br/><br/>
-            Позвольте выразить сию мысль в стихах:<br/><br/>
-
-            В круговороте дней земных<br/>
-            Есть высший смысл, незримый глазу:<br/>
-            Творить, любить, дарить другим<br/>
-            Души божественную фразу!"
-        ];
-
         return view('user.posts.edit', compact('post'));
     }
 
     // Страница метода обновления (редактирования) поста (PATCH)
-    public function update(Request $request, $post)
+    public function update(Request $request, Post $post)
     {
         //$title = $request->input('title');
         //$content = $request->input('content');
         //dd($title,$content);
         $validator = validate($request->all(), Post::getRules());
+
+        // Обновляем пост, если он существует
+        $post->update([
+            'title' => $validator['title'],
+            'content' => $validator['content'],
+            'published_at' => new \Carbon\Carbon($validator['published_at'] ?? null),
+            'published' => $validator['published'] ?? false,
+        ]);
+
         message(__('Пост успешно изменен'), 'alert-info');
 
-        //return redirect()->route('user.posts.show', $post);
+        return redirect()->route('user.posts.show', $post);
         // аналог
-        return redirect()->back();
+        //return redirect()->back();
     }
 
     // Страница метода удаления поста (DELETE)

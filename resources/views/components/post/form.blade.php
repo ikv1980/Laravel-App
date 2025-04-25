@@ -14,10 +14,13 @@
     <x-card-item>
         <x-label required>{{__('Дата публикации')}}</x-label>
         {{--Поле ввода текст а с редактором Trix--}}
-        <x-input type="date" name="published_at" value="{{$post->published_at ?? ''}}"/>
+        <x-input
+            type="date"
+            value="{{ $post->published_at ? $post->published_at->format('Y-m-d') : '' }}"
+            name="published_at"/>
     </x-card-item>
     <x-card-item>
-        <x-checkbox name="published">
+        <x-checkbox name="published" value="1">
             {{__('Опубликовано')}}
         </x-checkbox>
     </x-card-item>

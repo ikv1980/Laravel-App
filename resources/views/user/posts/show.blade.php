@@ -22,7 +22,7 @@
     </x-page-title>
 
     <p class="small text-muted">
-        ({{ now()->format('d.m.Y H:i:s')}})
+        <b>Опубликовано:</b> {{ $post->published_at->format('d.m.Y H:i:s')}}
     </p>
     <p>
         {!! $post->content !!}

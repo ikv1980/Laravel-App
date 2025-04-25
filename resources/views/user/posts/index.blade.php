@@ -25,7 +25,7 @@
                         </a>
                     </h2>
                     <p class="small text-muted">
-                        ({{ now()->format('d.m.Y H:i:s')}})
+                        ({{ $post->published_at->format('d.m.Y H:i:s')}})
                     </p>
                 </div>
             @endforeach

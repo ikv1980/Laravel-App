@@ -29,12 +29,12 @@ class BlogController extends Controller
             ->get(['id', 'title', 'published_at', 'published']);
 
         $posts = Post::query()
-            ->paginate($limit,['id', 'title', 'published_at', 'published']);
+            ->paginate($limit, ['id', 'title', 'content', 'published_at', 'published']);
 
         $posts = Post::query()
             //->orderBy('published_at', 'desc')
             ->latest('published_at')
-            ->paginate($limit,['id', 'title', 'published_at', 'published']);
+            ->paginate($limit, ['id', 'title', 'content', 'published_at', 'published']);
 
 //        // Добавляем фильтр. Добавили Request
 //        $search = $request->input('search');
@@ -67,11 +67,11 @@ class BlogController extends Controller
 
 //        return view('blog.index')
 //            ->with('posts', $posts)
-//            ->with('title', 'Blog');
+//            ->with('title', 'blog');
 
 //        return view('blog.index', [
 //            'posts' => $posts,
-//            'title' => 'Blog'
+//            'title' => 'blog'
 //        ]);
     }
 
@@ -80,46 +80,49 @@ class BlogController extends Controller
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
         //
     }
 
-    public function show(string $id_blog)
+    public function show(string $post_id)
     {
-        $post = (object)[
-            'id' => 1,
-            'title' => 'Смысл жизни',
-            'content' => "
-            О, внемлите, сударь!
-            <br/><br/>
-            Жизнь - сие дивное мгновение меж двух вечностей, дарованное нам для творения добра, познания красоты мироздания и дарования любви ближним. В сей краткий миг надлежит нам оставить след светлый, подобно звезде, что сияет во тьме!
-            <br/><br/>
-            Позвольте выразить сию мысль в стихах:<br/><br/>
-
-            В круговороте дней земных<br/>
-            Есть высший смысл, незримый глазу:<br/>
-            Творить, любить, дарить другим<br/>
-            Души божественную фразу!"
-        ];
+        // Работа с кэшем. Данные будут браться из кэша
+        // Запись 1 вариант
+        $post = cache()->remember("posts.{$post_id}", now()->addHours(), function () use ($post_id) {
+            info("Сохранение в КЭШ {$post_id}");
+            return Post::query()->findOrFail($post_id);
+        });
+        // Запись 2 вариант
+//        $post = cache()->remember(
+//            key: "posts.{$post_id}",
+//            ttl: now()->addHours(),
+//            callback: function () use ($post_id) {
+//                return Post::query()->findOrFail($post_id);
+//            });
+//
+//
+//        $post = Post::query()
+//            ->where('id', $post_id)
+//            ->firstOrFail(['title', 'content', 'published_at', 'published']);
+//
+//        $post = Post::query()
+//            ->findOrFail($post_id, ['title', 'content', 'published_at', 'published']);
 
         return view('blog.show', compact('post'));
     }
 
-    public function edit(string $id)
+    public function edit(string $post_id)
     {
         //
     }
 
-    public function update(Request $request, string $id)
+    public function update(Request $request, string $post_id)
     {
         //
     }
 
-    public function destroy(string $id)
+    public function destroy(string $post_id)
     {
         //
     }

@@ -6,7 +6,7 @@
             </a>
         </h5>
         <p>
-            {{ \Illuminate\Support\Str::limit($post->title, 60) }}
+            {{ \Illuminate\Support\Str::limit($post->content, 60) }}
             {{--{!! $post->content !!}--}}
         </p>
         <p class="small text-muted">
