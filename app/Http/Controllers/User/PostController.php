@@ -144,6 +144,8 @@ class    PostController extends Controller
             'published' => $validator['published'] ?? false,
         ]);
 
+        cache()->forget("posts.{$post->id}");
+
         message(__('Пост успешно изменен'), 'alert-info');
 
         return redirect()->route('user.posts.show', $post);
