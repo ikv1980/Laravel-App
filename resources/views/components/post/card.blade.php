@@ -13,6 +13,8 @@
             {{ $post->published_at->format('d.m.Y H:i:s')}}
             ({{ $post->published_at->diffForHumans()}})
         </p>
-        <p>{{$post->id}}</p>
+        <p>
+            <b>Автор: </b>{{ $post->name }}
+        </p>
     </x-card-body>
 </x-card-frame>

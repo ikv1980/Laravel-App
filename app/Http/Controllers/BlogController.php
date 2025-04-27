@@ -33,8 +33,9 @@ class BlogController extends Controller
 
         $posts = Post::query()
             //->orderBy('published_at', 'desc')
+            ->join('users', 'posts.user_id', '=', 'users.id')
             ->latest('published_at')
-            ->paginate($limit, ['id', 'title', 'content', 'published_at', 'published']);
+            ->paginate($limit, ['posts.id', 'title','users.name', 'content', 'published_at', 'published']);
 
 //        // Добавляем фильтр. Добавили Request
 //        $search = $request->input('search');

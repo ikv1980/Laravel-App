@@ -18,6 +18,9 @@
     <p class="small text-muted">
         <b>Опубликовано:</b> {{ $post->published_at->format('d.m.Y H:i:s')}}
     </p>
+    <p class="small text-muted">
+        <b>Автор:</b> {{ $post->user_name}}
+    </p>
     <p>
         {!! $post->content !!}
     </p>

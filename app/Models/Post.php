@@ -11,8 +11,8 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $content
  * @property Carbon $published_at
  * @property bool $published
+ * @property string $user_name Виртуальное поле
  */
-
 class Post extends Model
 {
     use HasFactory;
@@ -28,6 +28,8 @@ class Post extends Model
     protected $hidden = [
         'created_at', 'updated_at',
     ];
+
+    protected $appends = ['user_name']; // Добавляем виртуальное поле
 
     protected function casts(): array
     {
@@ -60,5 +62,17 @@ class Post extends Model
             'published_at' => new Carbon($attributes['published_at']) ?? null,
             'published' => $attributes['published'] ?? false,
         ]);
+    }
+
+    // Отношение с пользователем
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
+
+    // Accessor для имени пользователя
+    public function getUserNameAttribute()
+    {
+        return optional($this->user)->name; // Возвращаем имя пользователя или null
     }
 }
