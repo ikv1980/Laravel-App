@@ -8,11 +8,6 @@
         </div>
         <div class="col-12 col-md-3">
             <div class="mb-3">
-                <x-select name="category_id" :options="$categories" value="{{request('category_id')}}"/>
-            </div>
-        </div>
-        <div class="col-12 col-md-3">
-            <div class="mb-3">
                 <x-button type="submit">
                     {{__('Фильтр')}}
                 </x-button>
@@ -20,4 +15,3 @@
         </div>
     </div>
 </x-form>
-

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use Illuminate\Contracts\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 
 class BlogController extends Controller
@@ -16,12 +17,20 @@ class BlogController extends Controller
             'search' => ['nullable','string','min:3', 'max:50']
         ]);
 
-        // Добавляем фильтр. Добавили Request
-        $search = $request->input($validated['search']);
+        // ПЕРВЫЙ ВАРИАНТ ----------------------------------------------------------
+//        $search = $request->input($validated['search']);
+//        $posts = Post::query()
+//            ->where('content', 'LIKE', "%{$search}%")
+//            ->latest('published_at')
+//            ->paginate(12);
 
-
+        // ВТОРОЙ ВАРИАНТ ----------------------------------------------------------
         $posts = Post::query()
-            ->where('content', 'LIKE', "%{$search}%")
+            ->when($validated['search'] ?? null,
+                function (Builder $query, $search) {
+                $query->where('title', 'LIKE', "%{$search}%")
+                    ->orWhere('content', 'LIKE', "%{$search}%");
+            })
             ->latest('published_at')
             ->paginate(12);
 
