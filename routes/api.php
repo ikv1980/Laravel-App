@@ -16,3 +16,4 @@ Route::get('/user', function (Request $request) {
 Route::get('currency', function () {
    return Currency::all();
 });
+
