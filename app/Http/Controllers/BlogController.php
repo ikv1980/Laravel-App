@@ -14,7 +14,9 @@ class BlogController extends Controller
 
         // Валидация данных из запроса
         $validated = $request->validate([
-            'search' => ['nullable','string','min:3', 'max:50']
+            'search' => ['nullable', 'string', 'min:3', 'max:50'],
+            'from_date' => ['nullable', 'date'],
+            'to_date' => ['nullable', 'date', 'after_or_equal:from_date'],
         ]);
 
         // ПЕРВЫЙ ВАРИАНТ ----------------------------------------------------------
@@ -25,12 +27,33 @@ class BlogController extends Controller
 //            ->paginate(12);
 
         // ВТОРОЙ ВАРИАНТ ----------------------------------------------------------
-        $posts = Post::query()
-            ->when($validated['search'] ?? null,
-                function (Builder $query, $search) {
-                $query->where('title', 'LIKE', "%{$search}%")
-                    ->orWhere('content', 'LIKE', "%{$search}%");
-            })
+//        $posts = Post::query()
+//            ->when($validated['search'] ?? null,
+//                function (Builder $query, $search) {
+//                $query->where('title', 'LIKE', "%{$search}%")
+//                    ->orWhere('content', 'LIKE', "%{$search}%");
+//            })
+//            ->latest('published_at')
+//            ->paginate(12);
+
+        // ТРЕТИЙ ВАРИАНТ
+        $query = Post::query();
+
+        if ($search = $validated['search'] ?? null) {
+            $query->where('title', 'LIKE', "%{$search}%")
+                ->orWhere('content', 'LIKE', "%{$search}%");
+        }
+
+        if($fromDate = $validated['from_date'] ?? null) {
+            $query->whereDate('published_at', '>=', $fromDate);
+        }
+
+        if($toDate = $validated['to_date'] ?? null) {
+            $query->whereDate('published_at', '<=', $toDate);
+        }
+
+        $posts = $query
+            ->latest()
             ->latest('published_at')
             ->paginate(12);
 
