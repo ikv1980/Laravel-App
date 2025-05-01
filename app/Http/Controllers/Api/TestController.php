@@ -7,7 +7,6 @@ use App\Http\Requests\StorePostRequest;
 use App\Models\Post;
 use App\Models\User;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
-use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 
 class TestController extends Controller
@@ -41,6 +40,10 @@ class TestController extends Controller
     {
         $validatedData = $request->validated();
 
+        // Добавляем user_id (если требуется)
+        //$validatedData['user_id'] = Auth::id();
+        $validatedData['user_id'] = User::query()->value('id');
+
         $post = Post::query()->firstOrCreate([
             //'user_id' => Auth::id(),
             'user_id' => User::query()->value('id'),
@@ -52,7 +55,28 @@ class TestController extends Controller
 
         ]);
 
-        return response()->json($post);
+        return response()->json([
+            'message' => 'Пост успешно создан.',
+            'data' => $post,
+        ], 201);
+    }
+
+    public function update(StorePostRequest $request, $post)
+    {
+        //if ($post->user_id !== Auth::id()) {
+        //   return response()->json(['error' => 'Доступ запрещён'], 403);
+        //}
+
+        $validatedData = $request->validated();
+        $post = Post::query()->findOrFail($post);
+
+        // Обновляем пост, если он существует
+        $post->update($validatedData);
+
+        return response()->json([
+            'message' => 'Пост успешно обновлен',
+            'data' => $post,
+        ], 201);
     }
 
     public function destroy($id)

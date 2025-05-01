@@ -37,6 +37,6 @@ Route::get('currency', function () {
 Route::get('/tests', [TestController::class, 'index'])->name('api.test.index');
 Route::get('/tests/{id}', [TestController::class, 'show'])->name('api.test.show');
 Route::post('/tests', [TestController::class, 'store'])->name('api.test.store');
-Route::put('/tests/{id}', [TestController::class, 'update'])->name('api.test.update');
+Route::patch('/tests/{id}', [TestController::class, 'update'])->name('api.test.update');
 Route::delete('/tests/{id}', [TestController::class, 'destroy'])->name('api.test.destroy');
 

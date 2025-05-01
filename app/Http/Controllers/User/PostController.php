@@ -140,12 +140,14 @@ class    PostController extends Controller
 
         $validatedData = $request->validated();
         // Обновляем пост, если он существует
-        $post->update([
-            'title' => $validatedData['title'],
-            'content' => $validatedData['content'],
-            'published_at' => new Carbon($validatedData['published_at'] ?? null),
-            'published' => $validatedData['published'] ?? false,
-        ]);
+        //$post->update([
+        //    'title' => $validatedData['title'],
+        //    'content' => $validatedData['content'],
+        //    'published_at' => new Carbon($validatedData['published_at'] ?? null),
+        //    'published' => $validatedData['published'] ?? false,
+        //]);
+
+        $post->update($validatedData);
 
         cache()->forget("posts.{$post->id}");
 
