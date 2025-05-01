@@ -40,15 +40,6 @@ class Post extends Model
         ];
     }
 
-    public static function getRules(): array{
-        return  [
-            'title' => ['required', 'string', 'max:100'],
-            'content' => ['required', 'string', 'max:10000'],
-            'published_at' => ['nullable', 'string', 'date'],
-            'published' => ['nullable', 'boolean'],
-        ];
-    }
-
     public function isPublished(): bool
     {
         return $this->published && $this->published_at;
@@ -64,7 +55,7 @@ class Post extends Model
         ]);
     }
 
-    // Отношение с пользователем
+    // Отношение с пользователем (один ко многим)
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id');

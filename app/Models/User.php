@@ -19,16 +19,24 @@ class User extends Authenticatable
 {
     use HasFactory, Notifiable;
 
-    // Указание какое соединение используем
+    // ОПЦИОНАЛЬНО
+    // Указание какое соединение используем, так как данные могут лежать в разных БД
     protected $connection = 'my_database';
 
-    // Значения по умолчанию
+    // ОПЦИОНАЛЬНО
+    // Указание таблицы в БД. Может например таблица называться как-то иначе
+    protected $table = 'users';
+
+    // ОПЦИОНАЛЬНО
+    // Задаем значения по умолчанию, при необходимости
     protected $attributes = [
         'active' => true,
         'admin' => false,
     ];
 
-    // Описание свойств модели. Удобно видеть поля в БД -> будет пропускать только эти поля то что нужно вносить
+    // ОПЦИОНАЛЬНО
+    //Описание свойств модели.
+    // Удобно видеть поля в БД -> будет пропускать только эти поля то что нужно вносить
     protected $fillable = [
         'name', 'email', 'avatar',
         'active', 'admin', 'password',
@@ -56,5 +64,10 @@ class User extends Authenticatable
             'created_at' => 'datetime',
             'updated_at' => 'datetime',
         ];
+    }
+
+    // Отношение с постами (один ко многим)
+    public function posts(){
+        return $this->hasMany(Post::class, 'user_id');
     }
 }

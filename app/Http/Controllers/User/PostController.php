@@ -3,10 +3,10 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StorePostRequest;
 use App\Models\Post;
 use App\Models\User;
 use Carbon\Carbon;
-use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use Random\RandomException;
 
@@ -56,34 +56,36 @@ class    PostController extends Controller
     /**
      * @throws RandomException
      */
-    public function store(Request $request)
+    public function store(StorePostRequest $request)
     {
         //$title = $request->input('title');
         //$content = $request->input('content');
         //dd($title,$content);
 
         // Валидация данных сразу через request
-        //$validator = validator($request->all(),[
+        //$validatedData = validatedData($request->all(),[
         //    'title' => ['required','string','max:100'],
         //    'content' => ['required', 'string']
         //])->validate();
 
         // сокращение кода через хелпер-валидатор
-        $validator = validate($request->all(), [
-            'title' => ['required', 'string', 'max:100'],
-            'content' => ['required', 'string'],
-            'published_at' => ['nullable', 'string', 'date'],
-            'published' => ['nullable', 'boolean'],
-        ]);
+        //$validatedData = validate($request->all(), [
+        //    'title' => ['required', 'string', 'max:100'],
+        //    'content' => ['required', 'string'],
+        //    'published_at' => ['nullable', 'string', 'date'],
+        //    'published' => ['nullable', 'boolean'],
+        //]);
+
+        $validatedData = $request->validated();
 
         $post = Post::query()->firstOrCreate([
             //'user_id' => Auth::id(),
             'user_id' => User::query()->value('id'),
-            'title' => $request->get('title'),
+            'title' => $validatedData['title'],
         ], [
-            'content' => $validator['content'],
-            'published_at' => new Carbon($validator['published_at'] ?? null),
-            'published' => $validator['published'] ?? false,
+            'content' => $validatedData['content'],
+            'published_at' => new Carbon($validatedData['published_at'] ?? null),
+            'published' => $validatedData['published'] ?? false,
 
         ]);
 
@@ -129,19 +131,20 @@ class    PostController extends Controller
     }
 
     // Страница метода обновления (редактирования) поста (PATCH)
-    public function update(Request $request, Post $post)
+    public function update(StorePostRequest $request, Post $post)
     {
         //$title = $request->input('title');
         //$content = $request->input('content');
         //dd($title,$content);
-        $validator = validate($request->all(), Post::getRules());
+        //$validatedData = validate($request->all(), Post::getRules());
 
+        $validatedData = $request->validated();
         // Обновляем пост, если он существует
         $post->update([
-            'title' => $validator['title'],
-            'content' => $validator['content'],
-            'published_at' => new \Carbon\Carbon($validator['published_at'] ?? null),
-            'published' => $validator['published'] ?? false,
+            'title' => $validatedData['title'],
+            'content' => $validatedData['content'],
+            'published_at' => new Carbon($validatedData['published_at'] ?? null),
+            'published' => $validatedData['published'] ?? false,
         ]);
 
         cache()->forget("posts.{$post->id}");

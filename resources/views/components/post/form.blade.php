@@ -16,7 +16,7 @@
         {{--Поле ввода текст а с редактором Trix--}}
         <x-input
             type="date"
-            value="{{ $post->published_at ? $post->published_at->format('Y-m-d') : '' }}"
+            value="{{ $post?->published_at?->format('Y-m-d') ?? '' }}"
             name="published_at"/>
     </x-card-item>
     <x-card-item>
