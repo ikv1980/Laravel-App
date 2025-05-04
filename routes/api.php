@@ -18,13 +18,11 @@ Route::prefix('user')->group(function () {
         return $request->user();
     })->middleware('auth:sanctum');
     Route::get('/posts/{id_post}', function ($id_post){
-        $post = Post::query()->findOrFail($id_post);
-        return $post;
+        return Post::query()->findOrFail($id_post);
     });
     Route::get('{id_user}/posts', function ($id_user){
-        $posts = Post::query()
+        return Post::query()
             ->where('user_id', $id_user)->get();
-        return $posts;
     });
 });
 

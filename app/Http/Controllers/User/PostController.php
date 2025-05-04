@@ -18,14 +18,14 @@ class    PostController extends Controller
         // -------------------------------------------------------------------------------
         // Работа с чанками (chunk). Для пакетной обработки данных.
         // Применяется, когда у нас в БД очень много записей
-        $posts = Post::query()
-            ->latest('published_at')
-            ->chunk(10, function (Collection $posts) {
-                info('часть запроса chunk');
-                foreach ($posts as $post) {
-                    info("Обработка элемента {$post->id}");
-                }
-            });
+        //$posts = Post::query()
+        //    ->latest('published_at')
+        //    ->chunk(10, function (Collection $posts) {
+        //        info('часть запроса chunk');
+        //        foreach ($posts as $post) {
+        //            info("Обработка элемента {$post->id}");
+        //        }
+        //    });
         // -------------------------------------------------------------------------------
 
         $user_id = random_int(1001, 1018);

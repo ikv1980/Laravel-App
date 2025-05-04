@@ -53,7 +53,6 @@ class BlogController extends Controller
         }
 
         $posts = $query
-            ->latest()
             ->latest('published_at')
             ->paginate(12);
 
